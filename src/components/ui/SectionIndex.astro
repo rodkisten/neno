@@ -1,0 +1,11 @@
+---
+interface Props { index: string; eyebrow: string; title: string; subtitle?: string; }
+const { index, eyebrow, title, subtitle } = Astro.props;
+---
+<div class="neo-section__heading js-reveal">
+  <div>
+    <span class="neo-label">{index} / {eyebrow}</span>
+    <h2 class="neo-heading">{title}</h2>
+  </div>
+  {subtitle && <p class="neo-section__sub">{subtitle}</p>}
+</div>

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import Badge from '../components/ui/Badge.astro';
+import ArcadeButton from '../components/ui/ArcadeButton.astro';
 
 const projects = [
   {
@@ -210,466 +210,258 @@ const skillGroups = [
 ---
 
 <BaseLayout
-  title="Juan Silva Garcia — Engenharia de Software, Pesquisa em IA & Sistemas Interativos"
-  description="Portfólio profissional e acadêmico de Juan Silva Garcia (GARCIA, J. S.). Graduando em Ciência da Computação e Técnico em Informática (IF Sudeste MG), desenvolvedor Web/Mobile/Java, pesquisador publicado em IA aplicada à bioacústica (VII CoBICET, ISSN 2764-0582) e Professor Tutor na CNA Digital e Kodland."
+  title="Juan Silva Garcia — Engenharia, Pesquisa em IA e Game Systems"
+  description="Portfólio de Juan Silva Garcia: engenharia web e mobile, pesquisa em bioacústica com IA, ensino de programação e desenvolvimento de jogos."
 >
-  <Header />
+  <div class="neo-site">
+    <Header />
+    <main id="main-content" tabindex="-1">
+      <!-- 00 / Cinematic opening -->
+      <section class="neo-hero" aria-labelledby="hero-heading">
+        <div class="neo-hero__grid" aria-hidden="true"></div>
+        <div class="neo-container neo-hero__inner">
+          <div class="neo-hero__intro">
+            <span class="neo-hero__eyebrow hud-text">JUAN SILVA GARCIA / SOFTWARE & AI</span>
+            <h1 id="hero-heading" class="neo-hero__title">
+              <span class="line-pop">CÓDIGO.</span>
+              <span class="line-outline">PESQUISA.</span>
+              <span class="line-accent">& JOGOS.</span>
+            </h1>
+            <p class="neo-hero__description">
+              <strong>Engenharia de software, IA e sistemas interativos.</strong>
+              Graduando em Ciência da Computação no IF Sudeste MG. Desenvolvimento web, mobile e Java, pesquisa em bioacústica e ensino de programação.
+            </p>
+            <div class="neo-hero__actions">
+              <ArcadeButton href="#projetos">EXPLORAR PROJETOS</ArcadeButton>
+              <ArcadeButton href="#contato" variant="secondary">ENTRAR EM CONTATO</ArcadeButton>
+            </div>
+            <div class="neo-hero__foot">
+              <span>RIO POMBA · MG · BRASIL</span>
+              <span>IF SUDESTE MG</span>
+              <span>↓ ROLE PARA EXPLORAR</span>
+            </div>
+          </div>
+          <div class="neo-hero__art" role="img" aria-label="Grafismo original neo-manga de um rosto geométrico com enquadramento ciano, padrão de linhas e etiquetas coloridas">
+            <div class="neo-hero__poster">
+              <div class="neo-poster__halftone"></div>
+              <div class="neo-poster__circle"></div>
+              <div class="neo-poster__slashes"></div>
+              <div class="neo-poster__mask"></div>
+              <div class="neo-poster__face"></div>
+              <div class="neo-poster__eye neo-poster__eye--a"></div>
+              <div class="neo-poster__eye neo-poster__eye--b"></div>
+              <div class="neo-poster__nose"></div>
+              <div class="neo-poster__collar"></div>
+            </div>
+            <div class="neo-hero__corner">PORTFÓLIO / 2026</div>
+            <span class="neo-hero__sticker neo-sticker--one">SYSTEM<br />READY</span>
+            <span class="neo-hero__sticker neo-sticker--two">WEB / MOBILE / IA / GAME</span>
+            <span class="neo-hero__vertical" aria-hidden="true">DESIGN × DEVELOPMENT</span>
+          </div>
+        </div>
+      </section>
 
-  <main id="main-content" tabindex="-1" class="max-w-[1120px] mx-auto px-4 sm:px-8">
-    <!-- 1. HERO SECTION -->
-    <section aria-labelledby="hero-heading" class="py-12 sm:py-20 border-b border-border-subtle">
-      <div class="flex flex-wrap items-center gap-2.5 mb-6">
-        <Badge variant="success">DISPONÍVEL PARA PROJETOS & P&D</Badge>
-        <Badge variant="accent">CIÊNCIA DA COMPUTAÇÃO — IF SUDESTE MG</Badge>
-        <Badge variant="neutral">RIO POMBA, MG — BRASIL</Badge>
+      <div class="neo-marquee" aria-label="Web, mobile, pesquisa, inteligência artificial e jogos">
+        <div class="neo-marquee__track" aria-hidden="true">
+          <span>WEB DEVELOPMENT ✳</span><span>ARTIFICIAL INTELLIGENCE ✳</span><span>GAME SYSTEMS ✳</span><span>MOBILE ENGINEERING ✳</span>
+          <span>WEB DEVELOPMENT ✳</span><span>ARTIFICIAL INTELLIGENCE ✳</span><span>GAME SYSTEMS ✳</span><span>MOBILE ENGINEERING ✳</span>
+        </div>
       </div>
 
-      <h1
-        id="hero-heading"
-        class="text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-text-primary leading-[1.12] max-w-[22ch]"
-      >
-        Engenharia de Software, Pesquisa em IA e Sistemas Interativos.
-      </h1>
-
-      <p class="mt-6 text-base sm:text-lg text-text-secondary leading-[1.65] max-w-[65ch]">
-        Sou <strong class="text-text-primary font-semibold">Juan Silva Garcia</strong> (<code class="text-[13px] font-mono text-accent-text">GARCIA, J. S.</code>),
-        graduando em Ciência da Computação e Técnico em Informática pelo IF Sudeste MG — Campus Rio Pomba. Desenvolvo
-        sistemas web, mobile e Java, pesquiso aprendizado de máquina aplicado à bioacústica de espécies ameaçadas e
-        atuo como Professor Tutor de programação, jogos e IA na CNA Digital e na Kodland.
-      </p>
-
-      <div class="mt-8 flex flex-wrap items-center gap-3.5">
-        <a
-          href="#projetos"
-          class="min-h-[44px] px-6 py-2.5 inline-flex items-center justify-center bg-accent-solid hover:bg-accent-solid-hover text-white font-medium text-sm transition-colors"
-        >
-          Explorar Projetos Selecionados
-        </a>
-        <a
-          href="#experiencia"
-          class="min-h-[44px] px-6 py-2.5 inline-flex items-center justify-center bg-bg-surface hover:bg-bg-elevated text-text-primary border border-border-control hover:border-accent-text font-medium text-sm transition-colors"
-        >
-          Trajetória & Experiência
-        </a>
-        <a
-          href="#contato"
-          class="min-h-[44px] px-4 py-2.5 inline-flex items-center justify-center font-mono text-[13px] leading-normal text-accent-text hover:underline"
-        >
-          Contato Direto →
-        </a>
-      </div>
-
-      <!-- Painel Técnico de Credenciais Rápidas -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="border border-border-subtle bg-bg-surface p-5 space-y-1.5">
-          <div class="flex items-center justify-between font-mono text-[13px] leading-normal text-text-secondary">
-            <span>PUBLICAÇÃO CIENTÍFICA</span>
-            <span class="text-metric-accent">05/08/2026</span>
+      <!-- 01 / Profile -->
+      <section id="apresentacao" class="neo-section" aria-labelledby="apresentacao-heading">
+        <span class="neo-section__number" aria-hidden="true">00</span>
+        <div class="neo-container neo-profile">
+          <div class="js-reveal">
+            <span class="neo-label">00 / PERFIL</span>
+            <h2 id="apresentacao-heading" class="neo-profile__statement">
+              CIÊNCIA.<br /><em>PRÁTICA.</em><br />SOFTWARE.
+            </h2>
+            <p class="neo-profile__note">
+              Juan Silva Garcia (GARCIA, J. S.) integra formação técnica e graduação em Ciência da Computação,
+              pesquisa experimental publicada, desenvolvimento web e mobile, Java e jogos autorais.
+            </p>
+            <a href="http://lattes.cnpq.br/9434044887106048" target="_blank" rel="noopener noreferrer" class="neo-button neo-button--secondary">
+              <span>CURRÍCULO LATTES</span><span class="neo-button__arrow" aria-hidden="true">↗</span>
+            </a>
           </div>
-          <p class="text-base font-semibold text-text-primary">Anais VII CoBICET (ISSN 2764-0582)</p>
-          <p class="text-[13px] text-text-secondary leading-normal">
-            Classificação acústica de 136 espécies de aves ameaçadas: CNN com F1-weighted de 0,82 (~82% de acurácia) no
-            Cenário B (Proposto).
-          </p>
-        </div>
-
-        <div class="border border-border-subtle bg-bg-surface p-5 space-y-1.5">
-          <div class="flex items-center justify-between font-mono text-[13px] leading-normal text-text-secondary">
-            <span>ENGENHARIA WEB, MOBILE & JAVA</span>
-            <span class="text-metric-accent">PRODUÇÃO</span>
-          </div>
-          <p class="text-base font-semibold text-text-primary">Lundgren Atelier & ShapeMeApp</p>
-          <p class="text-[13px] text-text-secondary leading-normal">
-            Website comercial em Astro + Sanity.io + Cloudflare Pages e app Android em React Native + Expo + Firebase
-            (VII SIMEPE 2025).
-          </p>
-        </div>
-
-        <div class="border border-border-subtle bg-bg-surface p-5 space-y-1.5">
-          <div class="flex items-center justify-between font-mono text-[13px] leading-normal text-text-secondary">
-            <span>DOCÊNCIA TECNOLÓGICA</span>
-            <span class="text-metric-accent">ATIVO</span>
-          </div>
-          <p class="text-base font-semibold text-text-primary">Professor Tutor (CNA Digital & Kodland)</p>
-          <p class="text-[13px] text-text-secondary leading-normal">
-            Ensino prático de Python (Flask/POO), React, Roblox Studio/Luau, Unity, modelagem 3D no Blender e IA.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. APRESENTAÇÃO / PERFIL DE ENGENHARIA -->
-    <section id="apresentacao" aria-labelledby="apresentacao-heading" class="py-16 border-b border-border-subtle">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 space-y-3">
-          <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-            00. Perfil Técnico & Abordagem de Engenharia
-          </span>
-          <h2 id="apresentacao-heading" class="text-2xl font-semibold tracking-[-0.015em] text-text-primary">
-            Rigor científico aliado à entrega de software funcional.
-          </h2>
-          <p class="text-sm text-text-secondary leading-relaxed">
-            Minha trajetória no IF Sudeste MG — Campus Rio Pomba integra formação técnica em Informática, graduação em
-            Ciência da Computação, pesquisa experimental publicada em Inteligência Artificial e entrega de sistemas
-            web, mobile, Java e jogos autorais.
-          </p>
-        </div>
-
-        <div class="lg:col-span-7 border border-border-subtle bg-bg-surface p-6 space-y-4">
-          <div class="flex items-center justify-between border-b border-border-subtle pb-3 font-mono text-[13px] leading-normal">
-            <span class="text-accent-text">FORMAÇÃO & CREDENCIAIS COMPROVADAS (GARCIA, J. S.)</span>
-            <span class="text-metric-accent">VERIFICADO</span>
-          </div>
-
-          <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div class="space-y-1">
-              <dt class="font-mono text-[13px] leading-normal text-text-secondary">GRADUAÇÃO EM ANDAMENTO</dt>
-              <dd class="font-medium text-text-primary">Bacharelado em Ciência da Computação (2022–2026)</dd>
-              <dd class="text-[13px] leading-normal text-text-secondary">IF Sudeste MG — Campus Rio Pomba</dd>
+          <dl class="neo-panel neo-credentials js-reveal">
+            <div class="neo-credential">
+              <dt>FORMAÇÃO / 01</dt>
+              <dd>Bacharelado em Ciência da Computação (2022–2026)<small>Em andamento · IF Sudeste MG, Campus Rio Pomba</small></dd>
             </div>
-
-            <div class="space-y-1">
-              <dt class="font-mono text-[13px] leading-normal text-text-secondary">FORMAÇÃO TÉCNICA</dt>
-              <dd class="font-medium text-text-primary">Técnico em Informática (2019–2021 / Lattes 2019–2022)</dd>
-              <dd class="text-[13px] leading-normal text-text-secondary">
-                IF Sudeste MG — Campus Rio Pomba
-              </dd>
+            <div class="neo-credential">
+              <dt>FORMAÇÃO / 02</dt>
+              <dd>Técnico em Informática (2019–2021)<small>Lattes: 2019–2022 · IF Sudeste MG, Campus Rio Pomba</small></dd>
             </div>
-
-            <div class="space-y-1">
-              <dt class="font-mono text-[13px] leading-normal text-text-secondary">PUBLICAÇÕES & EVENTOS</dt>
-              <dd class="font-medium text-text-primary">VII CoBICET (2026), XVIII EAMC (2026) & VII SIMEPE (2025)</dd>
-              <dd class="text-[13px] leading-normal text-text-secondary">
-                Coautoria com Maurício A. N. Coelho (Bioacústica) e equipe ShapeMeApp
-              </dd>
+            <div class="neo-credential">
+              <dt>PESQUISA / 03</dt>
+              <dd>VII CoBICET · XVIII EAMC · VII SIMEPE<small>2026 / 2026 / 2025 · Coautoria científica e extensão</small></dd>
             </div>
-
-            <div class="space-y-1">
-              <dt class="font-mono text-[13px] leading-normal text-text-secondary">REGISTRO BIBLIOGRÁFICO</dt>
-              <dd class="font-medium text-text-primary">Trabalho Completo — Editora Even3 (05/08/2026)</dd>
-              <dd class="text-[13px] leading-normal font-mono text-metric-accent">ISSN: 2764-0582 • Lattes CNPq</dd>
+            <div class="neo-credential">
+              <dt>REGISTRO / 04</dt>
+              <dd>Trabalho completo, Editora Even3<small>05/08/2026 · ISSN 2764-0582 · Lattes CNPq</small></dd>
             </div>
           </dl>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 3. VITRINE DE PROJETOS (4 PILARES) -->
-    <section id="projetos" aria-labelledby="projetos-heading" class="py-16 border-b border-border-subtle space-y-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div class="space-y-2">
-          <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-            01. Projetos Selecionados & Pesquisa Aplicada
-          </span>
-          <h2 id="projetos-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-            Sistemas em Produção, Mobile, IA e Jogos Autorais
-          </h2>
-        </div>
-        <p class="font-mono text-[13px] leading-normal text-text-secondary">
-          4 PROJETOS PRINCIPAIS • DADOS AUDITADOS
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {
-          projects.map((project) => (
-            <article class="border border-border-subtle bg-bg-surface hover:border-accent-primary transition-colors p-6 flex flex-col justify-between space-y-6">
-              <div class="space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                  <span class="font-mono text-[13px] leading-normal text-accent-text">
-                    {project.code} // {project.category}
-                  </span>
-                  <Badge variant={project.statusVariant}>{project.status}</Badge>
+      <!-- 02 / Four real projects -->
+      <section id="projetos" class="neo-section neo-section--projects" aria-labelledby="projetos-heading">
+        <span class="neo-section__number" aria-hidden="true">01</span>
+        <div class="neo-container">
+          <div class="neo-section__heading js-reveal">
+            <div><span class="neo-label">01 / TRABALHOS SELECIONADOS</span><h2 id="projetos-heading" class="neo-heading">PROJETOS<br />EM FOCO.</h2></div>
+            <p class="neo-section__sub">Quatro frentes reais. Web em produção, pesquisa publicada, aplicativo mobile e desenvolvimento de jogos.</p>
+          </div>
+          <div class="neo-projects">
+            {projects.map((project, index) => (
+              <article class="neo-project js-reveal" data-tilt>
+                <div class="neo-project__art" aria-hidden="true">
+                  <span class="neo-project__corner">{project.code}</span>
+                  <span class="neo-project__glyph">{String(index + 1).padStart(2, '0')}</span>
+                  <span class="neo-project__status">{project.status}</span>
                 </div>
-
-                <h3 class="text-xl font-semibold text-text-primary leading-snug">{project.title}</h3>
-
-                <p class="text-sm text-text-secondary leading-relaxed">{project.summary}</p>
-              </div>
-
-              <div class="space-y-4 pt-4 border-t border-border-subtle">
-                <div class="flex items-center justify-between font-mono text-[13px] leading-normal">
-                  <span class="text-text-secondary">INDICADOR TÉCNICO</span>
-                  <span class="text-metric-accent font-medium">{project.metrics}</span>
-                </div>
-
-                <div class="flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span class="px-2 py-0.5 bg-bg-canvas border border-border-subtle font-mono text-[13px] leading-normal text-text-secondary">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div class="pt-1 flex flex-wrap items-center gap-4">
+                <div class="neo-project__body">
+                  <span class="neo-caption">{project.category}</span>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+                  <div class="neo-tag-list" aria-label="Tecnologias">
+                    {project.stack.map((tech) => <span class="neo-tag">{tech}</span>)}
+                  </div>
+                  <details class="neo-project__details">
+                    <summary>INDICADORES E CONTEXTO</summary>
+                    <p>{project.metrics}</p>
+                  </details>
                   {project.links.map((link) => (
-                    <a
-                      href={link.href}
-                      target={link.external ? '_blank' : undefined}
-                      rel={link.external ? 'noopener noreferrer' : undefined}
-                      class="min-h-[44px] inline-flex items-center text-sm font-mono text-accent-text hover:underline"
-                    >
-                      {link.label}
+                    <a class="neo-project__link" href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
+                      <span>{link.label}</span><span aria-hidden="true">↗</span>
                     </a>
                   ))}
                 </div>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- 4. GAME DEVELOPMENT LAB (SEÇÃO DEDICADA — NÚCLEO SELVAGEM) -->
-    <section id="game-lab" aria-labelledby="gamelab-heading" class="py-16 border-b border-border-subtle space-y-8">
-      <div class="space-y-2">
-        <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-          02. Game Development Lab — Núcleo Selvagem
-        </span>
-        <h2 id="gamelab-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-          Roguelite Autoral em Luau, Roblox Studio e Modelagem 3D no Blender
-        </h2>
-        <p class="text-sm sm:text-base text-text-secondary max-w-[65ch] leading-relaxed">
-          Apresentado exclusivamente como projeto autoral deste laboratório, <strong class="text-text-primary">Núcleo Selvagem</strong> é um
-          roguelite de criaturas mutantes em desenvolvimento, combinando expedições procedurais, evolução genética e
-          sistema de Base Pessoal 2.0 com programação modular em Luau (Roblox Studio) e assets 3D modelados no Blender.
-        </p>
-      </div>
-
-      <div class="border border-border-subtle bg-bg-surface">
-        <div class="px-5 py-3.5 border-b border-border-subtle bg-bg-elevated flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <span class="w-2.5 h-2.5 rounded-full bg-metric-accent" aria-hidden="true"></span>
-            <span class="font-mono text-[13px] leading-normal font-medium text-text-primary">
-              ARQUITETURA DE SISTEMAS — NÚCLEO SELVAGEM (ROBLOX STUDIO / LUAU / BLENDER)
-            </span>
+              </article>
+            ))}
           </div>
-          <span class="font-mono text-[13px] leading-normal text-accent-text">EM DESENVOLVIMENTO</span>
         </div>
+      </section>
 
-        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="border border-border-subtle bg-bg-canvas p-5 space-y-2">
-            <div class="font-mono text-[13px] leading-normal text-accent-text">SYS-01 // EXPEDIÇÕES ROGUELITE</div>
-            <h3 class="text-base font-semibold text-text-primary">Ciclo de Incursão & Progressão</h3>
-            <p class="text-[13px] text-text-secondary leading-relaxed">
-              Estrutura de partidas focada em expedições de risco e recompensa, coleta de recursos genéticos e retorno
-              estratégico para evolução contínua.
+      <!-- 03 / Pinned arcade sequence on desktop, regular content on mobile -->
+      <section id="game-lab" class="neo-section neo-section--game" aria-labelledby="gamelab-heading">
+        <div class="neo-container">
+          <div class="neo-game__intro js-reveal">
+            <div><span class="neo-label">02 / GAME DEVELOPMENT LAB</span><h2 id="gamelab-heading" class="neo-heading">NÚCLEO<br />SELVAGEM.</h2></div>
+            <p class="neo-text">
+              Roguelite autoral de criaturas mutantes, em desenvolvimento. Expedições, evolução genética e Base Pessoal 2.0,
+              com programação modular em Luau no Roblox Studio e modelagem 3D no Blender.
             </p>
           </div>
-
-          <div class="border border-border-subtle bg-bg-canvas p-5 space-y-2">
-            <div class="font-mono text-[13px] leading-normal text-accent-text">SYS-02 // EVOLUÇÃO GENÉTICA</div>
-            <h3 class="text-base font-semibold text-text-primary">Criaturas Mutantes & Atributos</h3>
-            <p class="text-[13px] text-text-secondary leading-relaxed">
-              Sistema modular em Luau para combinação de mutações, adaptação morfológica e sinergias de combate com
-              modelos 3D autorais produzidos no Blender.
-            </p>
-          </div>
-
-          <div class="border border-border-subtle bg-bg-canvas p-5 space-y-2">
-            <div class="font-mono text-[13px] leading-normal text-accent-text">SYS-03 // BASE PESSOAL 2.0</div>
-            <h3 class="text-base font-semibold text-text-primary">Persistência & Gestão de Estado</h3>
-            <p class="text-[13px] text-text-secondary leading-relaxed">
-              Arquitetura da Base Pessoal 2.0 integrando gerenciamento de estruturas, incubação e estado persistente
-              entre sessões no Roblox Studio.
-            </p>
-          </div>
-        </div>
-
-        <div class="px-6 py-4 border-t border-border-subtle bg-bg-canvas/60 flex flex-wrap items-center justify-between gap-4">
-          <span class="font-mono text-[13px] leading-normal text-text-secondary">
-            STACK: ROBLOX STUDIO • LUAU • BLENDER 3D
-          </span>
-          <a
-            href="#contato"
-            class="min-h-[44px] inline-flex items-center font-mono text-[13px] leading-normal text-accent-text hover:underline"
-          >
-            Solicitar Demonstração Técnica →
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. EXPERIÊNCIA PROFISSIONAL, PESQUISA E ENSINO -->
-    <section id="experiencia" aria-labelledby="experiencia-heading" class="py-16 border-b border-border-subtle space-y-8">
-      <div class="space-y-2">
-        <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-          03. Experiência Profissional, Pesquisa & Ensino
-        </span>
-        <h2 id="experiencia-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-          Trajetória Cronológica Comprovada (2022 — 2026)
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        {
-          experiences.map((exp) => (
-            <article class="border border-border-subtle bg-bg-surface p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-              <div class="lg:col-span-4 space-y-1">
-                <div class="font-mono text-[13px] leading-normal text-metric-accent font-medium">{exp.period}</div>
-                <div class="text-base font-semibold text-text-primary">{exp.org}</div>
-                <div class="font-mono text-[13px] leading-normal text-accent-text">{exp.tag}</div>
-              </div>
-
-              <div class="lg:col-span-8 space-y-2">
-                <h3 class="text-lg font-semibold text-text-primary">{exp.role}</h3>
-                <p class="text-sm text-text-secondary leading-relaxed">{exp.description}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <!-- Atuações Acadêmicas Complementares Comprovadas -->
-      <div class="border border-border-subtle bg-bg-surface p-6 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3 font-mono text-[13px] leading-normal">
-          <span class="text-accent-text">ATUAÇÕES ACADÊMICAS & MONITORIAS COMPLEMENTARES (IF SUDESTE MG)</span>
-          <span class="text-metric-accent">LATTES VERIFICADO</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {
-            complementaryActivities.map((act) => (
-              <div class="border border-border-subtle bg-bg-canvas p-4 space-y-1">
-                <div class="font-mono text-[13px] leading-normal text-metric-accent">{act.period}</div>
-                <h3 class="text-sm font-semibold text-text-primary">{act.title}</h3>
-                <p class="text-[13px] leading-normal text-text-secondary">{act.detail}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. PRÉVIA DO TECH JOURNAL -->
-    <section id="journal" aria-labelledby="journal-heading" class="py-16 border-b border-border-subtle space-y-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div class="space-y-2">
-          <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-            04. Tech Journal — Cadernos de Engenharia & Pesquisa
-          </span>
-          <h2 id="journal-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-            Artigos Técnicos e Memória de Arquitetura
-          </h2>
-        </div>
-        <span class="font-mono text-[13px] leading-normal text-text-secondary">
-          LEITURA PROFUNDA PREVISTA PARA A FASE 5
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {
-          journalPreviews.map((post) => (
-            <article class="border border-border-subtle bg-bg-surface p-6 flex flex-col justify-between space-y-5">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between font-mono text-[13px] leading-normal">
-                  <span class="text-accent-text">{post.code}</span>
-                  <span class="text-text-secondary">{post.category}</span>
-                </div>
-                <h3 class="text-base font-semibold text-text-primary leading-snug">{post.title}</h3>
-                <p class="text-[13px] text-text-secondary leading-relaxed">{post.excerpt}</p>
-              </div>
-
-              <div class="pt-4 border-t border-border-subtle font-mono text-[13px] leading-normal text-metric-accent">
-                {post.meta}
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- 7. COMPETÊNCIAS TÉCNICAS -->
-    <section id="competencias" aria-labelledby="competencias-heading" class="py-16 border-b border-border-subtle space-y-8">
-      <div class="space-y-2">
-        <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-          05. Competências Técnicas & Ferramentas
-        </span>
-        <h2 id="competencias-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-          Stack Tecnológico por Domínio de Atuação
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {
-          skillGroups.map((group) => (
-            <div class="border border-border-subtle bg-bg-surface p-5 space-y-4">
-              <div class="border-b border-border-subtle pb-3">
-                <div class="font-mono text-[13px] leading-normal text-accent-text">{group.code}</div>
-                <h3 class="text-base font-semibold text-text-primary mt-0.5">{group.title}</h3>
-              </div>
-
-              <ul class="space-y-2 text-[13px] leading-normal font-mono text-text-secondary">
-                {group.items.map((item) => (
-                  <li class="flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-metric-accent shrink-0" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <div class="neo-game__scene">
+            <div class="neo-game__visual" role="img" aria-label="Emblema geométrico original que muda de forma durante a navegação da sequência de sistemas do jogo">
+              <div class="neo-game__readout"><span>LAB / SYSTEM MAP</span><span>IN DEVELOPMENT</span></div>
+              <div class="neo-game__shape" data-stage="0"></div>
+              <span class="neo-game__visual-label" aria-hidden="true">NS / 01</span>
             </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- 8. CONTATO DIRETO -->
-    <section id="contato" aria-labelledby="contato-heading" class="py-16">
-      <div class="border border-border-subtle bg-bg-surface p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-7 space-y-3">
-          <span class="font-mono text-[13px] leading-normal uppercase tracking-wider text-accent-text block">
-            06. Canais Diretos de Contato
-          </span>
-          <h2 id="contato-heading" class="text-2xl sm:text-3xl font-semibold tracking-[-0.015em] text-text-primary">
-            Vamos conversar sobre engenharia de software, pesquisa ou novos projetos?
-          </h2>
-          <p class="text-sm sm:text-base text-text-secondary leading-relaxed max-w-[58ch]">
-            Estou disponível para oportunidades em desenvolvimento de software (Web, Mobile e Java), projetos de
-            pesquisa aplicada em IA ou docência e consultoria técnica.
-          </p>
+            <div class="neo-game__chapters">
+              <article class="neo-game__chapter" data-active="true">
+                <span class="neo-label">SYS-01 / EXPEDIÇÕES ROGUELITE</span>
+                <h3>INCURSÃO & PROGRESSÃO</h3>
+                <p>Partidas de risco e recompensa, coleta de recursos genéticos e retorno estratégico para evolução contínua.</p>
+              </article>
+              <article class="neo-game__chapter" data-active="false">
+                <span class="neo-label">SYS-02 / EVOLUÇÃO GENÉTICA</span>
+                <h3>MUTAÇÕES & ATRIBUTOS</h3>
+                <p>Sistema modular em Luau para combinações genéticas, adaptação morfológica e sinergias de combate, com modelos autorais no Blender.</p>
+              </article>
+              <article class="neo-game__chapter" data-active="false">
+                <span class="neo-label">SYS-03 / BASE PESSOAL 2.0</span>
+                <h3>PERSISTÊNCIA & ESTADO</h3>
+                <p>Arquitetura para estruturas, incubação e manutenção do estado entre sessões no Roblox Studio.</p>
+              </article>
+              <ArcadeButton href="#contato">SOLICITAR DEMONSTRAÇÃO TÉCNICA</ArcadeButton>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3">
-          <a
-            href="mailto:juansilvagarcia11037@gmail.com"
-            class="min-h-[44px] px-5 py-3 flex items-center justify-between bg-accent-solid hover:bg-accent-solid-hover text-white font-mono text-[13px] leading-normal transition-colors"
-          >
-            <span>E-MAIL DIRETO // juansilvagarcia11037@gmail.com</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-
-          <a
-            href="https://github.com/Juanzit"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="min-h-[44px] px-5 py-3 flex items-center justify-between border border-border-control bg-bg-canvas hover:border-accent-text text-text-primary font-mono text-[13px] leading-normal transition-colors"
-          >
-            <span>GITHUB // github.com/Juanzit</span>
-            <span class="text-accent-text" aria-hidden="true">↗</span>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/juan-garcia--/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="min-h-[44px] px-5 py-3 flex items-center justify-between border border-border-control bg-bg-canvas hover:border-accent-text text-text-primary font-mono text-[13px] leading-normal transition-colors"
-          >
-            <span>LINKEDIN // linkedin.com/in/juan-garcia--</span>
-            <span class="text-accent-text" aria-hidden="true">↗</span>
-          </a>
-
-          <a
-            href="http://lattes.cnpq.br/9434044887106048"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="min-h-[44px] px-5 py-3 flex items-center justify-between border border-border-control bg-bg-canvas hover:border-accent-text text-text-primary font-mono text-[13px] leading-normal transition-colors"
-          >
-            <span>CURRÍCULO LATTES // lattes.cnpq.br/9434044887106048</span>
-            <span class="text-metric-accent" aria-hidden="true">↗</span>
-          </a>
+      <!-- 04 / Career -->
+      <section id="experiencia" class="neo-section neo-section--journey" aria-labelledby="experiencia-heading">
+        <div class="neo-container">
+          <div class="neo-section__heading js-reveal">
+            <div><span class="neo-label">03 / EXPERIÊNCIA & ENSINO</span><h2 id="experiencia-heading" class="neo-heading">TRAJETÓRIA.</h2></div>
+            <p class="neo-section__sub">Engenharia, pesquisa aplicada e educação em programação. Registros de 2022 a 2026.</p>
+          </div>
+          <div class="neo-timeline">
+            {experiences.map((exp) => (
+              <article class="neo-timeline__item js-reveal">
+                <span class="neo-timeline__time">{exp.period}<br /><span class="neo-caption">{exp.tag}</span></span>
+                <div><h3>{exp.role}</h3><p class="neo-timeline__org">{exp.org}</p></div>
+                <p>{exp.description}</p>
+              </article>
+            ))}
+          </div>
+          <details class="neo-extra">
+            <summary>FORMAÇÃO COMPLEMENTAR + <span class="neo-caption">IF SUDESTE MG</span></summary>
+            <div class="neo-extra__grid">
+              {complementaryActivities.map((act) => <div class="neo-extra__item">
+                <span class="neo-caption">{act.period}</span><strong>{act.title}</strong><p>{act.detail}</p>
+              </div>)}
+            </div>
+          </details>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <Footer />
+      <!-- 05 / Editorial journal previews -->
+      <section id="journal" class="neo-section neo-section--journal" aria-labelledby="journal-heading">
+        <div class="neo-container">
+          <div class="neo-section__heading js-reveal">
+            <div><span class="neo-label">04 / CADERNOS TÉCNICOS</span><h2 id="journal-heading" class="neo-heading">JOURNAL.</h2></div>
+            <p class="neo-section__sub">Prévias editoriais de estudos e anotações técnicas. Publicação de artigos completos planejada para uma fase posterior.</p>
+          </div>
+          <div class="neo-journal">
+            {journalPreviews.map((entry, index) => <article class="neo-journal__entry js-reveal">
+              <div class="neo-caption">{entry.code} / {entry.category}</div>
+              <span class="neo-journal__num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{entry.title}</h3>
+              <p>{entry.excerpt}</p>
+              <small>{entry.meta}</small>
+            </article>)}
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 / Skills -->
+      <section id="competencias" class="neo-section neo-section--skills" aria-labelledby="competencias-heading">
+        <div class="neo-container">
+          <div class="neo-section__heading js-reveal">
+            <div><span class="neo-label">05 / FERRAMENTAS</span><h2 id="competencias-heading" class="neo-heading">STACK.</h2></div>
+            <p class="neo-section__sub">Tecnologias e métodos organizados por domínio de atuação.</p>
+          </div>
+          <div class="neo-skills">
+            {skillGroups.map((group) => <section class="neo-skill js-reveal">
+              <div class="neo-skill__head"><h3>{group.title}</h3><span class="neo-caption">{group.code}</span></div>
+              <div class="neo-skill__body">{group.items.map((skill) => <span>{skill}</span>)}</div>
+            </section>)}
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 / Final CTA -->
+      <section id="contato" class="neo-section neo-section--contact" aria-labelledby="contato-heading">
+        <div class="neo-container neo-contact">
+          <div class="js-reveal">
+            <span class="neo-label">06 / CONTATO DIRETO</span>
+            <h2 id="contato-heading" class="neo-contact__title">VAMOS<br />CRIAR?</h2>
+            <p class="neo-text">Disponível para projetos de desenvolvimento web, mobile e Java, pesquisa aplicada em IA, docência e consultoria técnica.</p>
+          </div>
+          <div class="neo-contact__links js-reveal">
+            <a href="mailto:juansilvagarcia11037@gmail.com"><span>EMAIL<br />juansilvagarcia11037@gmail.com</span><span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/Juanzit" target="_blank" rel="noopener noreferrer"><span>GITHUB / Juanzit</span><span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/juan-garcia--/" target="_blank" rel="noopener noreferrer"><span>LINKEDIN / JUAN GARCIA</span><span aria-hidden="true">↗</span></a>
+            <a href="http://lattes.cnpq.br/9434044887106048" target="_blank" rel="noopener noreferrer"><span>CURRÍCULO LATTES</span><span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
 </BaseLayout>

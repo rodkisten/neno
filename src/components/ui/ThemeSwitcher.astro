@@ -1,0 +1,45 @@
+---
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<div class:list={['theme-tools', compact && 'theme-tools--compact']} data-theme-controls>
+  <label class="sr-only" for="theme-preset">Preset de cores</label>
+  <select id="theme-preset" class="theme-select" data-theme-select aria-label="Preset de cores">
+    <option value="acid-pop">ACID POP</option>
+    <option value="cyber-arcade">CYBER</option>
+    <option value="mono-electric">MONO</option>
+  </select>
+  <button type="button" class="mode-toggle" data-mode-toggle aria-label="Ativar modo escuro" aria-pressed="false" title="Alternar tema claro e escuro">◐</button>
+</div>
+<script>
+  const controls = document.querySelectorAll<HTMLElement>('[data-theme-controls]');
+  const root = document.documentElement;
+  const update = () => {
+    controls.forEach((control) => {
+      const select = control.querySelector<HTMLSelectElement>('[data-theme-select]');
+      const toggle = control.querySelector<HTMLButtonElement>('[data-mode-toggle]');
+      if (select) select.value = root.dataset.theme || 'acid-pop';
+      if (toggle) {
+        const dark = root.dataset.mode === 'dark';
+        toggle.setAttribute('aria-pressed', String(dark));
+        toggle.setAttribute('aria-label', dark ? 'Ativar modo claro' : 'Ativar modo escuro');
+        toggle.textContent = dark ? '☼' : '◐';
+      }
+    });
+  };
+  controls.forEach((control) => {
+    control.querySelector<HTMLSelectElement>('[data-theme-select]')?.addEventListener('change', (event) => {
+      const theme = (event.currentTarget as HTMLSelectElement).value;
+      root.dataset.theme = theme;
+      try { localStorage.setItem('neno.theme', theme); } catch {}
+      update();
+    });
+    control.querySelector<HTMLButtonElement>('[data-mode-toggle]')?.addEventListener('click', () => {
+      const mode = root.dataset.mode === 'dark' ? 'light' : 'dark';
+      root.dataset.mode = mode;
+      try { localStorage.setItem('neno.mode', mode); } catch {}
+      update();
+    });
+  });
+  update();
+</script>

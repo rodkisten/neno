@@ -1,44 +1,27 @@
 ---
 import MobileMenu from './MobileMenu.astro';
-
+import ThemeSwitcher from '../ui/ThemeSwitcher.astro';
 const navItems = [
   { code: '01', label: 'Projetos', href: '/#projetos' },
   { code: '02', label: 'Game Lab', href: '/#game-lab' },
   { code: '03', label: 'Trajetória', href: '/#experiencia' },
   { code: '04', label: 'Journal', href: '/#journal' },
-  { code: '05', label: 'Competências', href: '/#competencias' },
+  { code: '05', label: 'Stack', href: '/#competencias' },
   { code: '06', label: 'Contato', href: '/#contato' },
 ];
 ---
-
-<header class="sticky top-0 z-40 border-b border-border-subtle bg-bg-canvas/95 backdrop-blur-sm">
-  <div class="max-w-[1120px] mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
-    <a href="/" class="min-h-[44px] inline-flex items-center gap-3 shrink-0 whitespace-nowrap group">
-      <span
-        class="w-2.5 h-2.5 bg-metric-accent rounded-full transition-transform group-hover:scale-125 shrink-0"
-        aria-hidden="true"></span>
-      <span class="font-semibold text-sm tracking-tight text-text-primary">JUAN SILVA GARCIA</span>
-      <span
-        class="hidden xl:inline-block font-mono text-[13px] leading-normal text-text-secondary border-l border-border-subtle pl-3"
-      >
-        SOFTWARE & AI RESEARCH
-      </span>
+<header class="neo-topbar">
+  <div class="neo-container neo-topbar__inner">
+    <a href="/" class="neo-brand" aria-label="Juan Silva Garcia, página inicial">
+      <span class="neo-brand__mark" aria-hidden="true">J</span>
+      <span>JUAN<span class="hidden sm:inline"> / GARCIA</span></span>
     </a>
-
-    <nav aria-label="Navegação principal" class="hidden md:flex items-center gap-0.5 lg:gap-1 shrink-0">
-      {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class="min-h-[44px] px-2.5 lg:px-3 inline-flex items-center whitespace-nowrap text-[13px] leading-normal font-mono text-text-secondary hover:text-text-primary hover:bg-bg-surface transition-colors"
-          >
-            <span class="text-accent-text mr-1">{item.code}.</span>
-            {item.label}
-          </a>
-        ))
-      }
+    <nav class="neo-nav" aria-label="Navegação principal">
+      {navItems.map((item) => <a href={item.href}><span class="neo-nav__number">{item.code}</span>{item.label}</a>)}
     </nav>
-
-    <MobileMenu items={navItems} />
+    <div class="neo-tools">
+      <ThemeSwitcher />
+      <MobileMenu items={navItems} />
+    </div>
   </div>
 </header>

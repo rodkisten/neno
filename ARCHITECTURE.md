@@ -1,61 +1,37 @@
-# Arquitetura Oficial — Portfólio Juan Silva Garcia
+# Arquitetura — NENO / NEO-MANGA
 
-## 1. Stack Tecnológica (Fase 1 Estabilizada)
-- **Astro 7** (`astro@7.4.5`) com `output: 'static'` — geração 100% estática (HTML/CSS por padrão, JavaScript restrito a ilhas e controles interativos).
-- **Vite 8** (`vite@8.3.5`) — bundler nativo do Astro 7 (sem pin legado de Vite 7).
-- **Tailwind CSS v4** (`tailwindcss@4.3.4` + `@tailwindcss/vite@4.3.4`) — tokens declarados em `:root` e mapeados via `@theme inline` em `src/styles/global.css`.
-- **TypeScript Estrito** (`typescript@5.9.3`, `astro/tsconfigs/strict`), validado via `@astrojs/check@0.9.12` (`astro check`).
-- **Content Layer API + Zod 4** (`src/content.config.ts`) — coleções tipadas para `projetos` e `journal`.
+## Stack
 
-## 2. Identidade Visual Oficial: Tema B — Violet Nature
-O Tema A (Cobalt Technical) foi removido após consolidação do **Tema B — Violet Nature**:
-- **Superfícies (Grafite Mineral Dominante)**:
-  - `--bg-canvas`: `#0B0A10` (17.92:1 com `#F3F4F6` — WCAG AAA)
-  - `--bg-surface`: `#14121B` (16.86:1 com `#F3F4F6` — WCAG AAA)
-  - `--bg-elevated`: `#1C1925` (15.70:1 com `#F3F4F6` — WCAG AAA)
-  - `--border-subtle`: `#302A3A` (divisórias estruturais de 1px)
-  - `--border-control`: `#756E88` (3.84:1 sobre surface — WCAG 1.4.11 AA para inputs, selects e botões secundários)
-- **Tipografia**:
-  - `--text-primary`: `#F3F4F6`
-  - `--text-secondary`: `#AAA3B8` (7.63:1 sobre surface — WCAG AAA)
-- **Interação (Roxo de Engenharia)**:
-  - `--accent-primary`: `#7C3AED` (5.70:1 com `#FFFFFF` — WCAG AA em botões primários)
-  - `--accent-hover`: `#6D28D9` (7.10:1 com `#FFFFFF` — WCAG AAA no hover)
-  - `--accent-active`: `#5B21B6` (8.98:1 com `#FFFFFF` — WCAG AAA no active)
-  - `--accent-text`: `#A78BFA` (6.82:1 sobre surface — links, anel de foco de 2px e abas ativas)
-- **Telemetria e Status (Verde-Limão Restrito)**:
-  - `--metric-accent`: `#B6D63A` (11.19:1 sobre surface — WCAG AAA; uso estrito em pequenos indicadores, badges de produção e métricas)
-  - `--status-warning`: `#F59E0B` (8.63:1 sobre surface — WCAG AAA)
+Astro 7, Vite, Tailwind CSS v4 e TypeScript estrito. `output: 'static'`: HTML pré-renderizado e JS de interação mínimo; nenhum framework client-side é necessário.
 
-## 3. Organização Aprovada do Projeto
+## Rotas e dados
 
-```text
-src/
-├── assets/                       # Imagens e diagramas otimizados (fases futuras)
-├── components/
-│   ├── layout/                   # Header, Footer, MobileMenu (Fase 2+)
-│   ├── ui/                       # Button, Badge, Tabs, ControlField, LabContainer, ThemeShowcase
-│   ├── portfolio/                # ProjectCard, TechStackList, ExperienceTimeline (Fase 3+)
-│   └── labs/                     # Simuladores client-side isolados por projeto (Fase 4)
-├── content.config.ts             # Schemas Zod 4 + loaders glob (Content Layer API)
-├── content/
-│   ├── projetos/                 # Estudos de caso em Markdown/MDX (Fase 3/4)
-│   └── journal/                  # Artigos técnicos do Tech Journal (Fase 5)
-├── layouts/
-│   ├── BaseLayout.astro          # Documento HTML5, fontes, favicon, skip-link e metadados
-│   ├── ProjectLayout.astro       # Layout dedicado de estudo de caso (Fase 4)
-│   └── ArticleLayout.astro       # Layout dedicado do Tech Journal (Fase 5)
-├── pages/
-│   ├── index.astro               # Redirecionamento temporário na Fase 1; Home na Fase 2
-│   ├── design-system.astro       # Catálogo técnico e showcase validado da Fase 1
-│   ├── projetos/                 # index.astro e [slug].astro (Fase 3/4)
-│   ├── journal/                  # index.astro e [slug].astro (Fase 5)
-│   ├── sobre.astro               # Apresentação profissional e carreira (Fase 6)
-│   └── 404.astro                 # Página de erro (Fase 7)
-└── styles/
-    └── global.css                # Tokens oficiais Tema B, tipografia e foco visível
-```
+- `src/pages/index.astro`: oito seções (hero, perfil, projetos, Game Lab, trajetória, Journal, competências, contato).
+- `src/pages/design-system.astro`: catálogo vivo de tokens e demonstrações dos componentes.
+- `src/content.config.ts`: coleções tipadas de projetos e Journal (futuras rotas dedicadas).
+- Os arrays originais `projects`, `experiences`, `complementaryActivities`, `journalPreviews` e `skillGroups` foram preservados na home. Não foram geradas credenciais novas.
 
-## 4. Diretrizes Arquiteturais Permanentes
-- **Reuso sem Duplicação**: `ThemeShowcase.astro` e `design-system.astro` consomem diretamente `Button`, `Badge`, `Tabs`, `ControlField` e `LabContainer`, mantendo uma única implementação de abas (`[data-tabs-root]`) e controles (`[data-range-input]`).
-- **Veracidade no Schema (`src/content.config.ts`)**: As coleções exigem `verificacaoStatus: 'verificado' | 'a-confirmar'` e preservam a padronização "Cenário A (Controle)" e "Cenário B (Proposto)".
+## Sistema visual
+
+- `src/styles/global.css`: cores de paleta, semânticas, legado Tailwind, geometria e movimento. Variáveis são a API pública de customização.
+- `src/styles/neo.css`: layout, pseudo-3D, HUD, componentes editoriais, seções e breakpoints.
+- `src/styles/catalog.css`: UI reutilizável do design system, estados dos botões, badges e formulários.
+- `src/components/ui/ThemeSwitcher.astro`: troca temas e modo claro/escuro, persistindo `neno.theme` e `neno.mode`.
+- `src/components/ui/ArcadeButton.astro`, `SectionIndex.astro` e os componentes anteriores de abas, formulários, badges e laboratório.
+- `src/components/layout/`: navegação principal, menu mobile com teclado/Escape, rodapé.
+
+## Paletas
+
+`data-theme="acid-pop"` (padrão), `data-theme="cyber-arcade"`, `data-theme="mono-electric"`; `data-mode="light" | "dark"`. O modo monocromático pode ser alterado pela variável `--color-electric`. Variáveis semânticas incluem `--color-background`, `--color-surface`, `--color-foreground`, `--color-primary`, `--color-secondary`, `--color-accent` e `--color-border`.
+
+## Movimento e acessibilidade
+
+`src/scripts/neo-motion.ts` configura reveals apenas com JS e `IntersectionObserver`, atualiza barra de progresso e camadas do hero via `requestAnimationFrame` e varia a forma gráfica no Game Lab. A cena usa CSS `position: sticky`, sem capturar wheel/touch, e deixa de fixar em viewports menores que 900px. Em `prefers-reduced-motion`, as timelines e reveals são desabilitados. O conteúdo é visível sem JS; botões e links seguem HTML semântico, com alvos de toque e estados de foco.
+
+## Geometria original
+
+O pôster do hero é uma composição de formas CSS (sem mídias externas). As cartas de projeto utilizam tipografia e grafismos programáticos, sem atribuir imagens fictícias aos projetos.
+
+## Build / QA
+
+`npm run build` é o comando oficial de verificação. O redesign criado nesta branch deve passar por build e testes de navegador antes de merge/publicação. Não há alegação de validação de browser sem execução real.

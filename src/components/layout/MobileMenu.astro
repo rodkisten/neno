@@ -1,99 +1,39 @@
 ---
-interface NavItem {
-  label: string;
-  href: string;
-  code: string;
-}
-
-interface Props {
-  items: NavItem[];
-}
-
+interface NavItem { label: string; href: string; code: string; }
+interface Props { items: NavItem[]; }
 const { items } = Astro.props;
 ---
-
-<div class="md:hidden" data-mobile-menu-root>
-  <button
-    type="button"
-    id="mobile-menu-trigger"
-    aria-expanded="false"
-    aria-controls="mobile-menu-panel"
-    class="min-h-[44px] min-w-[44px] px-3 inline-flex items-center justify-center gap-2 border border-border-control bg-bg-surface text-text-primary hover:border-accent-primary transition-colors cursor-pointer font-mono text-[13px] leading-normal"
-  >
-    <span data-menu-label>MENU</span>
-    <span class="sr-only"> de navegação</span>
-    <span class="text-accent-text font-bold" data-menu-icon aria-hidden="true">+</span>
+<div data-mobile-menu-root>
+  <button type="button" class="neo-menu-trigger" aria-expanded="false" aria-controls="mobile-menu-panel" data-menu-trigger>
+    <span data-menu-label>MENU</span><span aria-hidden="true" data-menu-glyph> +</span>
   </button>
-
-  <div
-    id="mobile-menu-panel"
-    hidden
-    class="fixed inset-x-0 top-16 border-b border-border-subtle bg-bg-canvas z-50 shadow-2xl max-h-[calc(100dvh-4rem)] overflow-y-auto"
-  >
-    <nav aria-label="Navegação principal (mobile)" class="max-w-[1120px] mx-auto px-4 py-6 space-y-2">
-      {
-        items.map((item) => (
-          <a
-            href={item.href}
-            data-mobile-link
-            class="min-h-[44px] px-4 py-3 flex items-center justify-between border border-border-subtle bg-bg-surface hover:border-accent-primary text-sm font-mono text-text-primary transition-colors"
-          >
-            <span>
-              <span class="text-accent-text mr-2">{item.code}.</span>
-              {item.label}
-            </span>
-            <span class="text-metric-accent text-[13px] leading-normal" aria-hidden="true">→</span>
-          </a>
-        ))
-      }
-      <div class="pt-4 mt-4 border-t border-border-subtle flex items-center justify-between text-[13px] leading-normal font-mono text-text-secondary">
-        <span>ROTA DE VALIDAÇÃO</span>
-        <a
-          href="/design-system/"
-          data-mobile-link
-          class="min-h-[44px] inline-flex items-center text-accent-text hover:underline"
-        >
-          /design-system
-        </a>
-      </div>
+  <div id="mobile-menu-panel" class="neo-menu-panel" hidden data-menu-panel>
+    <nav class="neo-container" aria-label="Navegação mobile">
+      {items.map((item) => <a href={item.href} data-mobile-link><span>{item.code} / {item.label}</span><span aria-hidden="true">↗</span></a>)}
+      <a href="/design-system/" data-mobile-link><span>07 / Design system</span><span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </div>
-
 <script>
-  const root = document.querySelector<HTMLElement>('[data-mobile-menu-root]');
-  if (root) {
-    const trigger = root.querySelector<HTMLButtonElement>('#mobile-menu-trigger');
-    const panel = root.querySelector<HTMLElement>('#mobile-menu-panel');
-    const icon = root.querySelector<HTMLElement>('[data-menu-icon]');
-    const label = root.querySelector<HTMLElement>('[data-menu-label]');
-    const links = root.querySelectorAll<HTMLAnchorElement>('[data-mobile-link]');
-
-    const setMenuState = (isOpen: boolean) => {
-      if (!trigger || !panel || !icon || !label) return;
-      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      panel.hidden = !isOpen;
-      icon.textContent = isOpen ? '×' : '+';
-      label.textContent = isOpen ? 'FECHAR' : 'MENU';
+  const menuRoot = document.querySelector<HTMLElement>('[data-mobile-menu-root]');
+  if (menuRoot) {
+    const trigger = menuRoot.querySelector<HTMLButtonElement>('[data-menu-trigger]');
+    const panel = menuRoot.querySelector<HTMLElement>('[data-menu-panel]');
+    const label = menuRoot.querySelector<HTMLElement>('[data-menu-label]');
+    const glyph = menuRoot.querySelector<HTMLElement>('[data-menu-glyph]');
+    const setOpen = (open: boolean) => {
+      if (!trigger || !panel) return;
+      trigger.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      if (label) label.textContent = open ? 'FECHAR' : 'MENU';
+      if (glyph) glyph.textContent = open ? ' ×' : ' +';
     };
-
-    trigger?.addEventListener('click', () => {
-      setMenuState(trigger.getAttribute('aria-expanded') !== 'true');
+    trigger?.addEventListener('click', () => setOpen(trigger.getAttribute('aria-expanded') !== 'true'));
+    menuRoot.querySelectorAll('[data-mobile-link]').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && trigger?.getAttribute('aria-expanded') === 'true') { setOpen(false); trigger.focus(); }
     });
-
-    links.forEach((link) => {
-      link.addEventListener('click', () => setMenuState(false));
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && trigger?.getAttribute('aria-expanded') === 'true') {
-        setMenuState(false);
-        trigger.focus();
-      }
-    });
-
-    window.matchMedia('(min-width: 48rem)').addEventListener('change', (e) => {
-      if (e.matches) setMenuState(false);
-    });
+    document.addEventListener('pointerdown', (event) => { if (!menuRoot.contains(event.target as Node)) setOpen(false); });
+    window.matchMedia('(min-width: 77.5rem)').addEventListener('change', (event) => { if (event.matches) setOpen(false); });
   }
 </script>
