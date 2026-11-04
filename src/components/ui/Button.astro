@@ -11,7 +11,8 @@ const { variant = 'primary', size = 'md', disabled = false, forceState = 'normal
 const Tag = href ? 'a' : 'button';
 ---
 <Tag
-  href={href}
+  href={!disabled ? href : undefined}
+  tabindex={disabled && href ? -1 : undefined}
   type={!href ? type : undefined}
   disabled={!href ? disabled : undefined}
   aria-disabled={disabled ? 'true' : undefined}
