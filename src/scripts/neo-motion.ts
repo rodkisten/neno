@@ -64,14 +64,17 @@ const initTilts = () => {
     if (!art) return;
     card.addEventListener('pointermove', (event) => {
       const rect = card.getBoundingClientRect();
+      const maxTilt = parseFloat(getComputedStyle(html).getPropertyValue('--tilt-max')) || 8;
       const x = clamp((event.clientX - rect.left) / rect.width);
       const y = clamp((event.clientY - rect.top) / rect.height);
       art.style.setProperty('--tilt-x', ((x - .5) * 12).toFixed(1) + 'px');
       art.style.setProperty('--tilt-y', ((y - .5) * 12).toFixed(1) + 'px');
+      art.style.setProperty('--tilt-rotate', ((x - .5) * maxTilt).toFixed(1) + 'deg');
     }, { passive: true });
     card.addEventListener('pointerleave', () => {
       art.style.removeProperty('--tilt-x');
       art.style.removeProperty('--tilt-y');
+      art.style.removeProperty('--tilt-rotate');
     });
   });
 };
@@ -82,3 +85,27 @@ window.addEventListener('scroll', queueScroll, { passive: true });
 window.addEventListener('resize', queueScroll, { passive: true });
 reduced.addEventListener('change', () => { setupReveals(); queueScroll(); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) queueScroll(); });
+
+/* Pause the marquee outside the viewport to avoid unnecessary animation work. */
+const marquee = document.querySelector<HTMLElement>('.neo-marquee');
+if (marquee && 'IntersectionObserver' in window) {
+  const marqueeObserver = new IntersectionObserver(([entry]) => {
+    marquee.classList.toggle('is-in-view', entry.isIntersecting);
+  }, { rootMargin: '120px 0px' });
+  marqueeObserver.observe(marquee);
+}
+/* Active section indication stays semantic and does not intercept native anchors. */
+const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>('.neo-nav a')];
+if (sectionLinks.length && location.pathname === '/' && 'IntersectionObserver' in window) {
+  const observedSections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+  const navigationObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      sectionLinks.forEach((link) => {
+        if (link.getAttribute('href') === '/#' + entry.target.id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+  }, { rootMargin: '-20% 0px -65% 0px' });
+  observedSections.forEach((section) => navigationObserver.observe(section));
+}

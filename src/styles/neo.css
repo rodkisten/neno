@@ -274,3 +274,16 @@ body { overflow-x: clip; }
   .neo-label, .neo-caption, .hud-text { font-weight: 800; }
   .neo-section__number { opacity:.18; }
 }
+
+/* Final interaction polish. */
+.theme-select, .mode-toggle { min-height: 44px; }
+.neo-footer__inner a { display: inline-flex; align-items: center; min-height: 44px; }
+.neo-container { padding-inline: max(0px, env(safe-area-inset-left)) max(0px, env(safe-area-inset-right)); }
+.neo-topbar { padding-top: env(safe-area-inset-top, 0px); }
+.neo-menu-panel { top: calc(76px + env(safe-area-inset-top, 0px)); }
+.neo-project__glyph { transform: rotate(calc(-8deg + var(--tilt-rotate, 0deg))) translate(var(--tilt-x,0px),var(--tilt-y,0px)); }
+.has-motion .neo-marquee__track { animation-play-state: paused; }
+.has-motion .neo-marquee.is-in-view .neo-marquee__track { animation-play-state: running; }
+@media (max-width: 600px) {
+  .neo-menu-panel { top: calc(68px + env(safe-area-inset-top, 0px)); }
+}

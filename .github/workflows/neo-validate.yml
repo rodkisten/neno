@@ -1,0 +1,27 @@
+name: NEO-MANGA / Validation
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feat/neo-manga-redesign]
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Static checks + Astro build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate anchors, themes and content
+        run: npm run test:design
+      - name: Astro typecheck and production build
+        run: npm run build
