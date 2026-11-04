@@ -1,36 +1,8 @@
 ---
-interface Props {
-  variant?: 'neutral' | 'accent' | 'success' | 'warning';
-  mono?: boolean;
-}
-
+interface Props { variant?: 'neutral' | 'accent' | 'success' | 'warning'; mono?: boolean; }
 const { variant = 'neutral', mono = true } = Astro.props;
-
-const variantStyles = {
-  neutral: 'bg-bg-surface text-text-secondary border-border-subtle',
-  accent: 'bg-accent-solid/15 text-accent-primary border-accent-primary/40',
-  success: 'bg-bg-surface text-status-success border-status-success/40',
-  warning: 'bg-bg-surface text-status-warning border-status-warning/40',
-}[variant];
 ---
-
-<span
-  class:list={[
-    'inline-flex items-center gap-2 px-3 py-1.5 text-[13px] border leading-normal',
-    mono ? 'font-mono' : 'font-sans font-medium',
-    variantStyles,
-  ]}
->
-  {(variant === 'success' || variant === 'warning' || variant === 'accent') && (
-    <span
-      class:list={[
-        'w-2 h-2 rounded-full shrink-0',
-        variant === 'success' && 'bg-status-success',
-        variant === 'warning' && 'bg-status-warning',
-        variant === 'accent' && 'bg-accent-primary',
-      ]}
-      aria-hidden="true"
-    />
-  )}
+<span class:list={['ui-badge', 'ui-badge--' + variant, mono && 'ui-badge--mono']}>
+  {(variant === 'success' || variant === 'warning' || variant === 'accent') && <span class="ui-badge__dot" aria-hidden="true"></span>}
   <slot />
 </span>

@@ -1,22 +1,11 @@
 ---
-const currentYear = new Date().getFullYear();
+const year = new Date().getFullYear();
 ---
-
-<footer class="border-t border-border-subtle bg-bg-canvas mt-20">
-  <div class="max-w-[1120px] mx-auto px-4 sm:px-8 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[13px] leading-normal font-mono text-text-secondary">
-    <div class="space-y-1">
-      <p class="text-text-primary font-sans font-medium text-sm">
-        Juan Silva Garcia — Ciência da Computação (IF Sudeste MG)
-      </p>
-      <p>Site estático construído com Astro 7, TypeScript e Tailwind CSS v4.</p>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-x-4">
-      <a href="/design-system/" class="min-h-[44px] inline-flex items-center text-accent-text hover:underline">
-        Design System
-      </a>
-      <span aria-hidden="true">•</span>
-      <span>© {currentYear}</span>
-    </div>
+<footer class="neo-footer">
+  <div class="neo-container neo-footer__inner">
+    <a href="/" class="neo-footer__name">JUAN / GARCIA</a>
+    <span>ENGENHARIA DE SOFTWARE · PESQUISA EM IA · JOGOS</span>
+    <a href="/design-system/">DESIGN SYSTEM ↗</a>
+    <span>© {year} · ASTRO / STATIC</span>
   </div>
 </footer>

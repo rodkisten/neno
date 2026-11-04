@@ -7,63 +7,14 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   href?: string;
 }
-
-const {
-  variant = 'primary',
-  size = 'md',
-  disabled = false,
-  forceState = 'normal',
-  type = 'button',
-  href,
-} = Astro.props;
-
-const baseClasses =
-  'inline-flex items-center justify-center min-h-[44px] min-w-[44px] font-medium transition-colors duration-150 rounded-none border select-none cursor-pointer disabled:opacity-45 disabled:pointer-events-none aria-disabled:opacity-45 aria-disabled:pointer-events-none';
-
-const sizeClasses = {
-  sm: 'px-3 py-1.5 text-[13px] leading-normal font-mono',
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-6 py-3 text-base',
-}[size];
-
-// Tema B — Violet Nature:
-// - Primary: #7C3AED com branco (5.70:1 AA), hover #6D28D9 (7.10:1 AAA), active #5B21B6 (8.98:1 AAA).
-// - Secondary: borda #756E88 (3.84:1 sobre surface, WCAG 1.4.11).
-const variantClasses = {
-  primary:
-    'bg-accent-solid text-white border-accent-primary/40 hover:bg-accent-solid-hover active:bg-accent-solid-active',
-  secondary:
-    'bg-bg-surface text-text-primary border-border-control hover:bg-bg-elevated hover:border-accent-primary active:bg-bg-canvas',
-  ghost:
-    'bg-transparent text-text-secondary border-transparent hover:text-text-primary hover:bg-bg-surface active:bg-bg-elevated',
-}[variant];
-
-const forcedClasses = {
-  normal: '',
-  hover:
-    variant === 'primary'
-      ? 'bg-accent-solid-hover! border-white/40!'
-      : variant === 'secondary'
-        ? 'bg-bg-elevated! border-accent-primary! text-text-primary!'
-        : 'bg-bg-surface! text-text-primary!',
-  focus: 'ring-2 ring-accent-primary ring-offset-2 ring-offset-bg-canvas',
-  active:
-    variant === 'primary'
-      ? 'bg-accent-solid-active! scale-[0.99]'
-      : variant === 'secondary'
-        ? 'bg-bg-canvas! border-accent-primary! scale-[0.99]'
-        : 'bg-bg-elevated! scale-[0.99]',
-}[forceState];
-
+const { variant = 'primary', size = 'md', disabled = false, forceState = 'normal', type = 'button', href } = Astro.props;
 const Tag = href ? 'a' : 'button';
 ---
-
 <Tag
-  href={href}
+  href={!disabled ? href : undefined}
+  tabindex={disabled && href ? -1 : undefined}
   type={!href ? type : undefined}
   disabled={!href ? disabled : undefined}
   aria-disabled={disabled ? 'true' : undefined}
-  class:list={[baseClasses, sizeClasses, variantClasses, forcedClasses]}
->
-  <slot />
-</Tag>
+  class:list={['ui-button', 'ui-button--' + variant, 'ui-button--' + size, forceState !== 'normal' && 'ui-button--force-' + forceState]}
+><slot /></Tag>

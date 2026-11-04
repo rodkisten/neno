@@ -1,465 +1,77 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import ThemeShowcase from '../components/ui/ThemeShowcase.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
-import Tabs, { type TabItem } from '../components/ui/Tabs.astro';
-import ControlField from '../components/ui/ControlField.astro';
-import LabContainer from '../components/ui/LabContainer.astro';
-import ThemeShowcase from '../components/ui/ThemeShowcase.astro';
-
-// Auditoria matemática real de contraste (WCAG 2.1) para a identidade oficial Tema B — Violet Nature
-const violetTokens = [
-  {
-    name: 'bg-canvas',
-    cssVar: '--bg-canvas',
-    hex: '#0B0A10',
-    role: 'Superfície dominante (grafite mineral)',
-    contrast: '17.92:1 vs #F3F4F6 (AAA)',
-    sampleClass: 'bg-bg-canvas',
-  },
-  {
-    name: 'bg-surface',
-    cssVar: '--bg-surface',
-    hex: '#14121B',
-    role: 'Cards, painéis e containers modulares',
-    contrast: '16.86:1 vs #F3F4F6 (AAA)',
-    sampleClass: 'bg-bg-surface',
-  },
-  {
-    name: 'bg-elevated',
-    cssVar: '--bg-elevated',
-    hex: '#1C1925',
-    role: 'Estados de hover em superfícies e barras',
-    contrast: '15.70:1 vs #F3F4F6 (AAA)',
-    sampleClass: 'bg-bg-elevated',
-  },
-  {
-    name: 'border-subtle',
-    cssVar: '--border-subtle',
-    hex: '#302A3A',
-    role: 'Grade editorial e divisórias estruturais de 1px',
-    contrast: '1.43:1 vs #0B0A10 (Decorativo)',
-    sampleClass: 'bg-border-subtle',
-  },
-  {
-    name: 'border-control',
-    cssVar: '--border-control',
-    hex: '#756E88',
-    role: 'Bordas de inputs, selects e botões secundários',
-    contrast: '3.84:1 vs #14121B (WCAG 1.4.11 AA)',
-    sampleClass: 'bg-border-control',
-  },
-  {
-    name: 'text-primary',
-    cssVar: '--text-primary',
-    hex: '#F3F4F6',
-    role: 'Títulos e leitura principal de alto contraste',
-    contrast: '17.92:1 vs #0B0A10 (AAA)',
-    sampleClass: 'bg-text-primary',
-  },
-  {
-    name: 'text-secondary',
-    cssVar: '--text-secondary',
-    hex: '#AAA3B8',
-    role: 'Descrições, legendas e metadados técnicos',
-    contrast: '7.63:1 vs #14121B (AAA)',
-    sampleClass: 'bg-text-secondary',
-  },
-  {
-    name: 'accent-solid',
-    cssVar: '--accent-primary',
-    hex: '#7C3AED',
-    role: 'Preenchimento de botão primário (interação principal)',
-    contrast: '5.70:1 vs #FFFFFF (AA)',
-    sampleClass: 'bg-accent-solid',
-  },
-  {
-    name: 'accent-solid-hover',
-    cssVar: '--accent-hover',
-    hex: '#6D28D9',
-    role: 'Hover de botão primário com ganho de contraste',
-    contrast: '7.10:1 vs #FFFFFF (AAA)',
-    sampleClass: 'bg-accent-solid-hover',
-  },
-  {
-    name: 'accent-primary',
-    cssVar: '--accent-text',
-    hex: '#A78BFA',
-    role: 'Links, anel de foco de 2px e rótulos ativos',
-    contrast: '6.82:1 vs #14121B (AA / AAA Grande)',
-    sampleClass: 'bg-accent-primary',
-  },
-  {
-    name: 'metric-accent',
-    cssVar: '--metric-accent',
-    hex: '#B6D63A',
-    role: 'Restrito a pequenos indicadores, status e telemetria',
-    contrast: '11.19:1 vs #14121B (AAA)',
-    sampleClass: 'bg-metric-accent',
-  },
+const palette = [
+  { name: 'ACID', token: '--color-acid', css: 'var(--color-acid)' },
+  { name: 'CYAN', token: '--color-cyan', css: 'var(--color-cyan)' },
+  { name: 'PINK', token: '--color-pink', css: 'var(--color-pink)' },
+  { name: 'ORANGE', token: '--color-orange', css: 'var(--color-orange)' },
+  { name: 'YELLOW', token: '--color-yellow', css: 'var(--color-yellow)' },
+  { name: 'VIOLET', token: '--color-violet', css: 'var(--color-violet)' },
 ];
-
-const specTabs: TabItem[] = [
-  {
-    id: 'spec-01',
-    code: '01.',
-    label: 'Arquitetura Estática',
-    content:
-      'Compilação HTML/CSS pura por padrão no Astro 7 + Vite 8, reservando JavaScript apenas para ilhas de simulação.',
-    metricLabel: 'BASELINE DE EXECUÇÃO',
-    metrics: 'Zero-JS por Padrão',
-    metricTone: 'metric',
-  },
-  {
-    id: 'spec-02',
-    code: '02.',
-    label: 'Acessibilidade WCAG 2.1',
-    content:
-      'Navegação completa por teclado (Tab, Shift+Tab, setas direcionais, Home/End) com anel de foco de 2px em #A78BFA e alvos mínimos de 44×44px.',
-    metricLabel: 'AUDITORIA DE CONTRASTE',
-    metrics: 'Conformidade AA / AAA',
-    metricTone: 'accent',
-  },
-  {
-    id: 'spec-03',
-    code: '03.',
-    label: 'Hierarquia Cromática',
-    content:
-      'Grafite mineral dominante (#0B0A10), roxo para elementos interativos (#7C3AED / #A78BFA) e verde-limão (#B6D63A) contido em métricas.',
-    metricLabel: 'IDENTIDADE OFICIAL',
-    metrics: 'Tema B — Violet Nature',
-    metricTone: 'metric',
-  },
+const motion = [
+  ['FAST', '--motion-fast', '160ms'],
+  ['BASE', '--motion-base', '320ms'],
+  ['SLOW', '--motion-slow', '700ms'],
+  ['EASING', '--ease-out-expo', 'cubic-bezier(0.19, 1, 0.22, 1)'],
+  ['PARALLAX', '--parallax-medium', '0.18'],
+  ['TILT', '--tilt-max', '8deg'],
 ];
 ---
-
-<BaseLayout title="Design System — Tema B: Violet Nature | Juan Silva Garcia">
-  <header class="border-b border-border-subtle bg-bg-canvas sticky top-0 z-40">
-    <div class="max-w-[1120px] mx-auto px-4 sm:px-8 min-h-16 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-      <div class="flex items-center gap-3">
-        <span class="font-mono text-[13px] leading-normal px-2.5 py-1 bg-bg-surface border border-border-subtle text-accent-primary">
-          FASE 01 / VIOLET NATURE
-        </span>
-        <span class="font-semibold text-sm tracking-tight hidden sm:inline text-text-primary">
-          JUAN SILVA GARCIA
-        </span>
-      </div>
-      <nav aria-label="Seções do Design System" class="flex flex-wrap items-center gap-2 sm:gap-5 text-[13px] leading-normal font-mono">
-        <a href="#tokens" class="min-h-[44px] px-2 inline-flex items-center text-text-secondary hover:text-text-primary transition-colors">
-          01. TOKENS
-        </a>
-        <a href="#tipografia" class="min-h-[44px] px-2 inline-flex items-center text-text-secondary hover:text-text-primary transition-colors">
-          02. TIPOGRAFIA
-        </a>
-        <a href="#componentes" class="min-h-[44px] px-2 inline-flex items-center text-text-secondary hover:text-text-primary transition-colors">
-          03. COMPONENTES
-        </a>
-        <a href="#showcase" class="min-h-[44px] px-2 inline-flex items-center text-accent-primary hover:underline">
-          04. SHOWCASE
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main-content" tabindex="-1" class="max-w-[1120px] mx-auto px-4 sm:px-8 py-10 space-y-14 focus:outline-none">
-    <!-- Cabeçalho Editorial -->
-    <section class="border border-border-subtle bg-bg-surface p-6 sm:p-8 space-y-4">
-      <div class="flex flex-wrap items-center gap-2.5">
-        <Badge variant="accent">IDENTIDADE OFICIAL: VIOLET NATURE</Badge>
-        <Badge variant="success">ASTRO 7 + VITE 8 + TAILWIND V4</Badge>
-        <Badge variant="neutral">CHECKPOINT FASE 01</Badge>
-      </div>
-      <h1 class="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-text-primary">
-        Fundação Visual & Sistema de Componentes Compartilhados
-      </h1>
-      <p class="text-base text-text-secondary max-w-[65ch] leading-[1.65]">
-        Especificação consolidada do portfólio de engenharia de software de Juan Silva Garcia.
-        Superfície dominante em grafite mineral, interação em roxo técnico e indicadores pontuais em verde-limão,
-        com container de 1120px, metadados em 13px–14px e alvos de toque mínimos de 44×44px.
-      </p>
-    </section>
-
-    <!-- 01. Tokens Cromáticos e Auditoria WCAG 2.1 -->
-    <section id="tokens" class="space-y-6 scroll-mt-24">
-      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border-subtle pb-3">
-        <h2 class="text-xl font-semibold tracking-tight text-text-primary">
-          <span class="font-mono text-[13px] text-accent-primary mr-2">01.</span>
-          Tokens Cromáticos & Auditoria WCAG 2.1 (Tema B — Violet Nature)
-        </h2>
-        <span class="text-[13px] leading-normal font-mono text-text-secondary">
-          {violetTokens.length} TOKENS OFICIAIS
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {
-          violetTokens.map((token) => (
-            <article class="border border-border-subtle bg-bg-surface p-4 flex flex-col justify-between space-y-4">
-              <div class="flex items-center justify-between gap-3">
-                <div class:list={['w-12 h-12 border border-border-subtle shrink-0', token.sampleClass]} />
-                <div class="text-right font-mono">
-                  <div class="text-sm font-semibold text-text-primary">{token.hex}</div>
-                  <div class="text-[13px] leading-normal text-accent-primary">{token.cssVar}</div>
-                </div>
-              </div>
-              <div class="space-y-1 pt-2 border-t border-border-subtle">
-                <p class="text-[13px] leading-normal text-text-primary font-medium">{token.role}</p>
-                <p class="text-[13px] leading-normal font-mono text-text-secondary">WCAG: {token.contrast}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- 02. Escala Tipográfica -->
-    <section id="tipografia" class="space-y-6 scroll-mt-24">
-      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border-subtle pb-3">
-        <h2 class="text-xl font-semibold tracking-tight text-text-primary">
-          <span class="font-mono text-[13px] text-accent-primary mr-2">02.</span>
-          Escala Tipográfica Editorial (H1–H4, Corpo, Metadados e Código)
-        </h2>
-        <span class="text-[13px] leading-normal font-mono text-text-secondary">INTER + JETBRAINS MONO</span>
-      </div>
-
-      <div class="border border-border-subtle bg-bg-surface divide-y divide-border-subtle">
-        <div class="p-6 space-y-2">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            H1 / 36px–40px / Bold / Tracking -0.02em
-          </span>
-          <p class="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-text-primary">
-            Engenharia de Software, Pesquisa em IA e Desenvolvimento Mobile
-          </p>
+<BaseLayout title="Design System — NEO-MANGA / Juan Silva Garcia" description="Guia vivo de tokens, temas, tipografia, componentes e motion do portfólio NEO-MANGA.">
+  <div class="neo-site">
+    <Header />
+    <main class="neo-catalog neo-container" id="main-content" tabindex="-1">
+      <span class="neo-label">DESIGN SYSTEM / 01.0</span>
+      <h1 class="neo-catalog__title">NEO-MANGA.<br /><span class="neo-outline">UI SYSTEM.</span></h1>
+      <p class="neo-text" style="margin-top:1.5rem">Três paletas. Um sistema de componentes. Motion progressivo, sem bloquear a leitura. Troque o preset ou o modo de cor no cabeçalho.</p>
+      <section class="neo-catalog__section" aria-labelledby="palette-heading">
+        <h2 id="palette-heading">01 / CORES.</h2>
+        <div class="neo-swatches">
+          {palette.map((color) => <div class="neo-swatch" style={'--swatch:' + color.css}><strong>{color.name}</strong><span>{color.token}</span></div>)}
         </div>
-
-        <div class="p-6 space-y-2">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            H2 / 24px–28px / Semibold / Tracking -0.015em
-          </span>
-          <p class="text-xl sm:text-2xl font-semibold tracking-[-0.015em] text-text-primary">
-            Arquitetura de Sistemas e Experimentos Técnicos
-          </p>
-        </div>
-
-        <div class="p-6 space-y-2">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            H3 / 20px / Semibold
-          </span>
-          <p class="text-lg sm:text-xl font-semibold text-text-primary">
-            Classificação Bioacústica com Redes Neurais Convolucionais
-          </p>
-        </div>
-
-        <div class="p-6 space-y-2">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            H4 / 14px / Semibold Uppercase Mono
-          </span>
-          <p class="text-sm font-semibold font-mono uppercase tracking-wider text-text-primary">
-            Especificação de Pipeline Experimental
-          </p>
-        </div>
-
-        <div class="p-6 space-y-2">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            Body / 16px / Line-height 1.65 / Limite 65ch
-          </span>
-          <p class="text-base text-text-primary leading-[1.65] max-w-[65ch]">
-            Parágrafo principal otimizado para leitura longa em estudos de caso e artigos do Tech Journal.
-            A largura máxima de coluna é contida em 65 caracteres para preservar o conforto visual.
-          </p>
-          <p class="text-sm text-text-secondary leading-[1.65] max-w-[65ch]">
-            Parágrafo secundário (#AAA3B8) utilizado para resumos de cards, descrições contextuais e notas metodológicas.
-          </p>
-        </div>
-
-        <div class="p-6 space-y-3">
-          <span class="text-[13px] leading-normal font-mono text-accent-primary">
-            Caption & Code Block / JetBrains Mono / 13px–14px
-          </span>
-          <p class="text-[13px] leading-normal font-mono text-text-secondary">
-            FIG 01. COMPARATIVO ENTRE CENÁRIO A (CONTROLE) E CENÁRIO B (PROPOSTO)
-          </p>
-          <pre class="p-4 bg-bg-canvas border border-border-subtle text-[13px] leading-normal font-mono text-text-primary overflow-x-auto"><code>const calcularCargaInterna = (pse: number, duracaoMinutos: number): number =&gt; &#123;
-  return pse * duracaoMinutos; // Unidade Arbitrária (UA)
-&#125;;</code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03. Componentes Compartilhados e Matriz de Estados -->
-    <section id="componentes" class="space-y-6 scroll-mt-24">
-      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border-subtle pb-3">
-        <h2 class="text-xl font-semibold tracking-tight text-text-primary">
-          <span class="font-mono text-[13px] text-accent-primary mr-2">03.</span>
-          Componentes Compartilhados (`Button`, `Badge`, `Tabs`, `ControlField`, `LabContainer`)
-        </h2>
-        <span class="text-[13px] leading-normal font-mono text-text-secondary">
-          INSTÂNCIAS REAIS RENDERIZADAS
-        </span>
-      </div>
-
-      <div class="border border-border-subtle bg-bg-surface p-5 sm:p-6 space-y-8">
-        <div class="space-y-4">
-          <h3 class="text-[13px] leading-normal font-mono uppercase tracking-wider text-text-secondary">
-            Matriz de Estados Visuais de `Button.astro` (Alvos Mínimos 44×44px)
-          </h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <caption class="sr-only">
-                Matriz de estados interativos do componente Button nas variantes Primary, Secondary e Ghost
-              </caption>
-              <thead>
-                <tr class="border-b border-border-subtle text-[13px] leading-normal font-mono text-text-secondary">
-                  <th scope="col" class="py-3 pr-4">VARIANTE</th>
-                  <th scope="col" class="py-3 px-3">NORMAL</th>
-                  <th scope="col" class="py-3 px-3">HOVER</th>
-                  <th scope="col" class="py-3 px-3">FOCUS (TAB)</th>
-                  <th scope="col" class="py-3 px-3">ACTIVE</th>
-                  <th scope="col" class="py-3 pl-3">DISABLED</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border-subtle text-sm">
-                <tr>
-                  <th scope="row" class="py-4 pr-4 font-mono text-[13px] leading-normal text-text-secondary font-normal">
-                    Primary
-                  </th>
-                  <td class="py-4 px-3"><Button variant="primary">Explorar</Button></td>
-                  <td class="py-4 px-3"><Button variant="primary" forceState="hover">Explorar</Button></td>
-                  <td class="py-4 px-3"><Button variant="primary" forceState="focus">Explorar</Button></td>
-                  <td class="py-4 px-3"><Button variant="primary" forceState="active">Explorar</Button></td>
-                  <td class="py-4 pl-3"><Button variant="primary" disabled>Indisponível</Button></td>
-                </tr>
-                <tr>
-                  <th scope="row" class="py-4 pr-4 font-mono text-[13px] leading-normal text-text-secondary font-normal">
-                    Secondary
-                  </th>
-                  <td class="py-4 px-3"><Button variant="secondary">Arquitetura</Button></td>
-                  <td class="py-4 px-3"><Button variant="secondary" forceState="hover">Arquitetura</Button></td>
-                  <td class="py-4 px-3"><Button variant="secondary" forceState="focus">Arquitetura</Button></td>
-                  <td class="py-4 px-3"><Button variant="secondary" forceState="active">Arquitetura</Button></td>
-                  <td class="py-4 pl-3"><Button variant="secondary" disabled>Indisponível</Button></td>
-                </tr>
-                <tr>
-                  <th scope="row" class="py-4 pr-4 font-mono text-[13px] leading-normal text-text-secondary font-normal">
-                    Ghost
-                  </th>
-                  <td class="py-4 px-3"><Button variant="ghost">Código</Button></td>
-                  <td class="py-4 px-3"><Button variant="ghost" forceState="hover">Código</Button></td>
-                  <td class="py-4 px-3"><Button variant="ghost" forceState="focus">Código</Button></td>
-                  <td class="py-4 px-3"><Button variant="ghost" forceState="active">Código</Button></td>
-                  <td class="py-4 pl-3"><Button variant="ghost" disabled>Privado</Button></td>
-                </tr>
-              </tbody>
-            </table>
+        <p class="neo-caption" style="margin-top:1.5rem">PRESETS: ACID POP / CYBER ARCADE / MONO ELECTRIC. TUDO EDITÁVEL EM src/styles/global.css.</p>
+      </section>
+      <section class="neo-catalog__section" aria-labelledby="type-heading">
+        <h2 id="type-heading">02 / TIPOGRAFIA.</h2>
+        <div class="neo-catalog__sample">
+          <span class="neo-caption">DISPLAY / ANTON</span>
+          <p class="neo-heading">VISUAL.<br /><span class="neo-outline">SYSTEM.</span></p>
+          <div class="neo-catalog__grid" style="margin-top:2rem">
+            <p style="font:700 clamp(1.4rem,3vw,3rem)/1.2 var(--font-sans)">Space Grotesk<br />Interface & conteúdo</p>
+            <p style="font:600 .8rem/1.8 var(--font-mono)">IBM Plex Mono<br />HUD / LABELS / IDENTIFICADORES<br />0123456789</p>
           </div>
         </div>
-
-        <div class="pt-6 border-t border-border-subtle space-y-3">
-          <h3 class="text-[13px] leading-normal font-mono uppercase tracking-wider text-text-secondary">
-            Variantes de `Badge.astro` (Verde-limão restrito a status/métricas)
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <Badge variant="success">EM PRODUÇÃO</Badge>
-            <Badge variant="warning">EM DESENVOLVIMENTO</Badge>
-            <Badge variant="accent">PUBLICAÇÃO CIENTÍFICA</Badge>
-            <Badge variant="neutral">React Native</Badge>
-            <Badge variant="neutral">Astro 7</Badge>
-            <Badge variant="neutral">Python / CNN</Badge>
-            <Badge variant="neutral">Roblox Luau</Badge>
-          </div>
+      </section>
+      <section class="neo-catalog__section" aria-labelledby="component-heading">
+        <h2 id="component-heading">03 / COMPONENTES.</h2>
+        <div class="neo-catalog__sample neo-catalog__components">
+          <Button>BOTÃO PRIMÁRIO ↗</Button>
+          <Button variant="secondary">SECUNDÁRIO ↗</Button>
+          <Button variant="ghost">AÇÃO DISCRETA</Button>
+          <Badge variant="neutral">SISTEMA</Badge>
+          <Badge variant="accent">EM FOCO</Badge>
+          <Badge variant="success">ATIVO</Badge>
+          <Badge variant="warning">ATENÇÃO</Badge>
         </div>
-
-        <div class="pt-6 border-t border-border-subtle grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="space-y-3">
-            <h3 class="text-[13px] leading-normal font-mono uppercase tracking-wider text-text-secondary">
-              `Tabs.astro` (Setas ← / → / Home / End)
-            </h3>
-            <Tabs id="ds-spec" ariaLabel="Especificações do Design System" tabs={specTabs} />
-          </div>
-
-          <div class="space-y-3">
-            <h3 class="text-[13px] leading-normal font-mono uppercase tracking-wider text-text-secondary">
-              `ControlField.astro` (Text, Select, Range e Disabled)
-            </h3>
-            <div class="border border-border-subtle bg-bg-canvas p-5 space-y-4">
-              <ControlField
-                id="ds-input-cenario"
-                label="Filtro de Parâmetro"
-                type="text"
-                defaultValue="Cenário B (Proposto)"
-              />
-              <ControlField
-                id="ds-select-modelo"
-                label="Arquitetura de Modelo"
-                type="select"
-                options={[
-                  { value: 'cnn', label: 'CNN (Rede Neural Convolucional)' },
-                  { value: 'svm', label: 'SVM (Máquina de Vetores de Suporte)' },
-                  { value: 'hmm', label: 'GMM-HMM (Modelo Oculto de Markov)' },
-                ]}
-              />
-              <ControlField
-                id="ds-range-pse"
-                label="Percepção Subjetiva de Esforço (PSE)"
-                type="range"
-                min={0}
-                max={10}
-                defaultValue={7}
-                unit="PSE"
-              />
-              <ControlField
-                id="ds-input-disabled"
-                label="Conexão com Banco Externo (Bloqueado)"
-                type="text"
-                defaultValue="Desativado por diretriz de arquitetura estática"
-                disabled={true}
-              />
-            </div>
-          </div>
+      </section>
+      <section class="neo-catalog__section" aria-labelledby="showcase-heading">
+        <h2 id="showcase-heading">04 / ESTADOS & CONTROLES.</h2>
+        <ThemeShowcase themeTitle="NEO-MANGA / COMPONENT SHOWCASE" themeSubtitle="Componentes reais do projeto: navegação, abas, controles, indicadores e laboratório interativo." />
+      </section>
+      <section class="neo-catalog__section" aria-labelledby="motion-heading">
+        <h2 id="motion-heading">05 / MOTION.</h2>
+        <div class="neo-catalog__grid">
+          {motion.map((item) => <div class="neo-catalog__sample"><span class="neo-caption">{item[0]}</span><p style="margin-top:.5rem;font:600 .84rem/1.6 var(--font-mono)">{item[1]}</p><strong>{item[2]}</strong></div>)}
         </div>
-
-        <div class="pt-6 border-t border-border-subtle space-y-3">
-          <h3 class="text-[13px] leading-normal font-mono uppercase tracking-wider text-text-secondary">
-            `LabContainer.astro` (Isolamento Padrão de Simuladores)
-          </h3>
-          <LabContainer
-            code="LAB-SHELL-00"
-            title="Container Padrão para Experiências Interativas da Fase 4"
-            statusLabel="AMBIENTE SIMULADO"
-            statusVariant="accent"
-            disclaimer="Execução 100% local no navegador sem conexão com banco de dados de produção."
-          >
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[13px] leading-normal font-mono">
-              <div class="p-4 border border-border-subtle bg-bg-canvas space-y-1">
-                <span class="text-text-secondary">ENTRADA DE PARÂMETROS</span>
-                <p class="text-text-primary text-sm font-sans">Controles isolados com feedback imediato.</p>
-              </div>
-              <div class="p-4 border border-border-subtle bg-bg-canvas space-y-1">
-                <span class="text-text-secondary">PROCESSAMENTO LOCAL</span>
-                <p class="text-text-primary text-sm font-sans">Regras em TypeScript estrito sem API paga.</p>
-              </div>
-              <div class="p-4 border border-border-subtle bg-bg-canvas space-y-1">
-                <span class="text-text-secondary">SAÍDA DE TELEMETRIA</span>
-                <p class="text-metric-accent text-sm font-mono font-semibold">Indicadores de alto contraste</p>
-              </div>
-            </div>
-          </LabContainer>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04. Showcase Integrado da Identidade Oficial -->
-    <section id="showcase" class="space-y-4 scroll-mt-24">
-      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border-subtle pb-3">
-        <h2 class="text-xl font-semibold tracking-tight text-text-primary">
-          <span class="font-mono text-[13px] text-accent-primary mr-2">04.</span>
-          Showcase Integrado de Aplicação (`ThemeShowcase.astro` com Tema B — Violet Nature)
-        </h2>
-        <span class="text-[13px] leading-normal font-mono text-metric-accent">
-          ● COMPOSIÇÃO SEM DUPLICAÇÃO
-        </span>
-      </div>
-      <ThemeShowcase />
-    </section>
-  </main>
+        <p class="neo-text" style="margin-top:1.5rem">Scroll e parallax usam a API nativa de animação do navegador. O conteúdo permanece legível com JavaScript indisponível ou movimento reduzido.</p>
+      </section>
+      <a href="/" class="neo-button neo-button--secondary"><span>VOLTAR AO PORTFÓLIO</span><span class="neo-button__arrow" aria-hidden="true">↗</span></a>
+    </main>
+    <Footer />
+  </div>
 </BaseLayout>

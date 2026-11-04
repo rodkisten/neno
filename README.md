@@ -1,25 +1,38 @@
-# Portfólio — Juan Silva Garcia
+# Juan Silva Garcia / NEO-MANGA
 
-Portfólio de Engenharia de Software, Pesquisa em IA e Sistemas Interativos. Aplicação 100% estática construída com **Astro 7**, **Vite 8**, **Tailwind CSS v4** e **TypeScript estrito**, sob a identidade visual **Tema B — Violet Nature**.
+Portfólio estático de Juan Silva Garcia, construído com Astro 7, Tailwind CSS v4 e TypeScript.
 
-## Comandos
+## Direção visual
+
+**NEO-MANGA / FUTURE POP**: composição editorial assimétrica, tipografia de pôster, painéis gráficos, interfaces de jogo e motion cinematográfico progressivo. Sem personagens de franquias, mídias fictícias ou dados profissionais inventados.
+
+## Design system
+
+- Três presets: **ACID POP**, **CYBER ARCADE**, **MONO ELECTRIC**.
+- Claro/escuro controlados via `data-mode` no documento.
+- Cor customizável `--color-electric` para o preset monocromático.
+- Paleta, aliases semânticos e tokens de motion em `src/styles/global.css`.
+- Layout e grafismos em `src/styles/neo.css`; primitives e catálogo em `src/styles/catalog.css`.
+- Controls do cabeçalho persistem preferências em `localStorage`.
+- Componentes `ArcadeButton`, `ThemeSwitcher` e `SectionIndex`.
+- Motion em `src/scripts/neo-motion.ts`, usando `IntersectionObserver` e `requestAnimationFrame`, sem interferir no scroll nativo.
+- O Game Lab possui painel sticky em desktop e fluxo normal em telas menores.
+
+## Rotas
+
+- `/`: home completa, oito áreas com conteúdo original.
+- `/design-system/`: catálogo visual e demonstrações interativas.
+
+## Desenvolvimento
 
 ```bash
-npm install        # instala dependências
-npm run dev        # servidor local em http://localhost:4321
-npm run build      # astro check + astro build (saída estática em dist/)
-npm run preview    # serve o build de produção localmente
+npm ci
+npm run dev
+npm run build
 ```
 
-## Estado Atual
+`npm run build` executa `astro check && astro build`, com arquivos estáticos em `dist/`.
 
-**Fase 2 Concluída (Protótipo Visual da Home)** — A rota principal `/` (`src/pages/index.astro`) apresenta a página inicial completa em 8 seções com os componentes globais `Header.astro`, `MobileMenu.astro` e `Footer.astro` e dados comprovados do Currículo Lattes, currículo profissional e publicação científica nos Anais do VII CoBICET (`ISSN 2764-0582`). A rota `/design-system/` permanece ativa como catálogo vivo da identidade **Tema B — Violet Nature**. Consulte `PROJECT_STATUS.md`.
+## Compromissos
 
-## Documentação de Governança
-
-- `AGENTS.md` — regras permanentes de engenharia e veracidade estrita
-- `ARCHITECTURE.md` — stack, tokens oficiais e árvore arquitetural aprovada
-- `PROJECT_STATUS.md` — status da fase, auditoria `npm audit` e testes executados
-- `CONTENT_GUIDE.md` — diretrizes editoriais e padronização acadêmica
-- `DEPLOYMENT_GUIDE.md` — publicação estática gratuita (Cloudflare Pages / GitHub Pages)
-- `CHANGELOG.md` — histórico de versões
+Os conteúdos profissionais e acadêmicos preservam as informações originais. Consulte `AGENTS.md` para as regras de veracidade e `ARCHITECTURE.md` para arquitetura, acessibilidade e tokens. O redesign não inclui novos serviços pagos.

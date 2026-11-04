@@ -1,31 +1,92 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/*
- * Identidade Visual Oficial — Tema B: Violet Nature
- * - Grafite mineral (#0B0A10 / #14121B / #1C1925) como superfície dominante.
- * - Roxo de engenharia (#7C3AED / #A78BFA) para interação, foco e navegação.
- * - Verde-limão técnico (#B6D63A) restrito a pequenos indicadores e métricas.
- */
 :root {
-  --bg-canvas: #0B0A10;
-  --bg-surface: #14121B;
-  --bg-elevated: #1C1925;
-  --border-subtle: #302A3A;
-  /* Borda de controles e botões secundários: >= 3.57:1 (WCAG 1.4.11) sobre todas as superfícies */
-  --border-control: #756E88;
-  --text-primary: #F3F4F6;
-  --text-secondary: #AAA3B8;
-  --accent-primary: #7C3AED;
-  --accent-hover: #6D28D9;
-  --accent-active: #5B21B6;
-  --accent-text: #A78BFA;
-  --metric-accent: #B6D63A;
-  --status-warning: #F59E0B;
+  --color-black: #09090b;
+  --color-white: #ffffff;
+  --color-paper: #f5f4ef;
+  --color-ink: #101014;
+  --color-acid: #bbff32;
+  --color-cyan: #00d9f5;
+  --color-pink: #ff34bd;
+  --color-orange: #ff582b;
+  --color-yellow: #ffcb16;
+  --color-violet: #8338ff;
+  --color-blue: #3465ff;
+  --color-electric: #bbff32;
+  --color-primary: var(--color-acid);
+  --color-secondary: var(--color-cyan);
+  --color-accent: var(--color-pink);
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+  --color-surface: var(--color-white);
+  --color-panel: #ebeae3;
+  --color-muted: #44444d;
+  --color-border: var(--color-ink);
+  --color-action-ink: var(--color-black);
+  --radius-panel: 28px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --border-graphic: 2px;
+  --shadow-hard: 6px 6px 0 var(--color-border);
+  --shadow-hard-lg: 12px 12px 0 var(--color-border);
+  --motion-fast: 160ms;
+  --motion-base: 320ms;
+  --motion-slow: 700ms;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --parallax-subtle: 0.08;
+  --parallax-medium: 0.18;
+  --parallax-strong: 0.32;
+  --tilt-max: 8deg;
+  --perspective-card: 1000px;
+  /* Legacy aliases retain compatibility with the existing Astro UI showcase. */
+  --bg-canvas: var(--color-background);
+  --bg-surface: var(--color-surface);
+  --bg-elevated: var(--color-panel);
+  --border-subtle: var(--color-border);
+  --border-control: var(--color-border);
+  --text-primary: var(--color-foreground);
+  --text-secondary: var(--color-muted);
+  --accent-primary: var(--color-primary);
+  --accent-hover: var(--color-secondary);
+  --accent-active: var(--color-accent);
+  --accent-text: var(--color-foreground);
+  --metric-accent: var(--color-foreground);
+  --status-warning: var(--color-orange);
+}
+
+:root[data-theme="acid-pop"] {
+  --color-primary: var(--color-acid);
+  --color-secondary: var(--color-cyan);
+  --color-accent: var(--color-pink);
+}
+
+:root[data-theme="cyber-arcade"] {
+  --color-primary: var(--color-cyan);
+  --color-secondary: var(--color-orange);
+  --color-accent: var(--color-yellow);
+}
+
+:root[data-theme="mono-electric"] {
+  --color-primary: var(--color-electric);
+  --color-secondary: var(--color-electric);
+  --color-accent: var(--color-electric);
+}
+
+:root[data-mode="dark"] {
+  --color-background: var(--color-black);
+  --color-foreground: var(--color-paper);
+  --color-surface: #19191d;
+  --color-panel: #24242a;
+  --color-muted: #c0bec7;
+  --color-border: var(--color-paper);
 }
 
 @theme inline {
@@ -49,40 +110,25 @@
 }
 
 @layer base {
-  html {
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-  }
+  html { background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+  body { margin: 0; min-width: 320px; -webkit-font-smoothing: antialiased; }
+  *, *::before, *::after { box-sizing: border-box; }
+  *:focus-visible { outline: 3px solid var(--color-secondary); outline-offset: 4px; }
+  ::selection { background: var(--color-primary); color: var(--color-action-ink); }
+  [hidden] { display: none !important; }
+  button, input, select, textarea { font: inherit; }
+  button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  code, pre, kbd, samp { font-family: var(--font-mono); }
+  img, svg { max-width: 100%; }
+  a { text-underline-offset: .2em; }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  *,
-  *::before,
-  *::after {
-    outline-color: var(--accent-text);
-  }
-
-  *:focus-visible {
-    outline: 2px solid var(--accent-text);
-    outline-offset: 2px;
-  }
-
-  code, pre, kbd, samp {
-    font-family: var(--font-mono);
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }

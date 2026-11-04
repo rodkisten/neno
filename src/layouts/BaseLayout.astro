@@ -1,39 +1,39 @@
 ---
 import '../styles/global.css';
-
-interface Props {
-  title: string;
-  description?: string;
-}
-
-const {
-  title,
-  description = 'Portfólio de Engenharia de Software e Tech Journal — Juan Silva Garcia',
-} = Astro.props;
+import '../styles/neo.css';
+import '../styles/catalog.css';
+interface Props { title: string; description?: string; }
+const { title, description = 'Portfólio de Engenharia de Software, Pesquisa em IA e Sistemas Interativos — Juan Silva Garcia' } = Astro.props;
 ---
-
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="acid-pop" data-mode="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('neno.theme');
+        const mode = localStorage.getItem('neno.mode');
+        if (['acid-pop', 'cyber-arcade', 'mono-electric'].includes(theme)) document.documentElement.dataset.theme = theme;
+        if (['light', 'dark'].includes(mode)) document.documentElement.dataset.mode = mode;
+      } catch {}
+    </script>
   </head>
-  <body class="min-h-screen bg-bg-canvas text-text-primary selection:bg-accent-primary/30 selection:text-text-primary">
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-bg-elevated focus:text-text-primary focus:px-4 focus:py-2 focus:border focus:border-accent-primary focus:text-sm focus:font-mono"
-    >
-      Pular para o conteúdo principal
-    </a>
+  <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[150] focus:bg-bg-surface focus:text-text-primary focus:p-3 focus:border-2 focus:border-border-control">Pular para o conteúdo principal</a>
+    <div class="neo-progress" aria-hidden="true"></div>
     <slot />
+    <script>import '../scripts/neo-motion';</script>
   </body>
 </html>
