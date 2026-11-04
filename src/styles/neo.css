@@ -220,7 +220,7 @@ body { overflow-x: clip; }
   .neo-brand__mark { width:32px;height:32px; }
   .theme-select { width:85px; font-size:.61rem; }
   .mode-toggle { min-width:38px; }
-  .neo-hero__title { font-size: clamp(4.8rem,18.4vw,8rem); }
+  .neo-hero__title { font-size: clamp(3.3rem,14vw,6.4rem); }
   .neo-hero__art { width:90%; }
   .neo-hero__actions { flex-direction:column; align-items:stretch; }
   .neo-hero__art { aspect-ratio:1; }
@@ -257,4 +257,20 @@ body { overflow-x: clip; }
   .neo-marquee__track { animation:none; }
   .has-motion .js-reveal { opacity:1; transform:none; clip-path:none; }
   .has-motion .neo-hero__title > span, .has-motion .neo-hero__poster, .has-motion .neo-hero__actions, .has-motion .neo-hero__eyebrow { animation:none; }
+}
+
+@media (max-width: 390px) {
+  .neo-hero__title { font-size: 12.5vw; }
+  .neo-sticker--two { left: 0; bottom: 8%; }
+}
+@media (max-width: 375px) {
+  .neo-topbar__inner { gap:.3rem; }
+  .neo-brand { font-size:1.4rem; }
+  .neo-tools { gap:.2rem; }
+  .theme-select { width:78px; }
+  .neo-menu-trigger { min-width:42px; font-size:.66rem; }
+}
+@media (prefers-contrast: more) {
+  .neo-label, .neo-caption, .hud-text { font-weight: 800; }
+  .neo-section__number { opacity:.18; }
 }

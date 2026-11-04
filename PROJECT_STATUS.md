@@ -1,3 +1,13 @@
+## Redesign NEO-MANGA (branch `feat/neo-manga-redesign`, 04/11/2026)
+
+- Solicitação explícita de redesign completo recebida e implementada em PR de revisão.
+- Home redesenhada preservando as oito áreas originais, fontes de dados acadêmicos/profissionais e links.
+- Themes ACID POP, CYBER ARCADE, MONO ELECTRIC + claro/escuro, motion progressivo, cards, menu e novo catálogo.
+- `npm run test:design`: checks estáticos locais disponíveis na branch; execução de build e QA visual em browser pendentes neste ambiente.
+- `main` mantida intacta até validação do pull request.
+
+---
+
 # Status do Projeto — Portfólio Juan Silva Garcia
 
 ## Fase Atual: Fase 2 Concluída e Auditada Factualmente — Home do Portfólio (aguardando autorização para Fase 3)

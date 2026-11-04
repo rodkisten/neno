@@ -1,3 +1,10 @@
+## 2026-11-04 — NEO-MANGA / FUTURE POP (PR em revisão)
+- Reconstrução editorial de todas as seções da home e do catálogo de design.
+- Sistema de 3 presets temáticos e modos claro/escuro via CSS custom properties.
+- Motion progressivo (entrada, scroll, parallax, Game Lab sticky), responsividade e acessibilidade.
+- Componentes Astro reutilizáveis, documentação e testes estáticos de integridade.
+- Build e verificação em navegador ainda pendentes; não publicados na branch principal.
+
 # Changelog
 
 ## 0.4.0 — Fase 2: Protótipo Visual da Home, Layout Compartilhado e Dados Comprovados

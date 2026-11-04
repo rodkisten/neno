@@ -62,6 +62,12 @@
   --status-warning: var(--color-orange);
 }
 
+:root[data-theme="acid-pop"] {
+  --color-primary: var(--color-acid);
+  --color-secondary: var(--color-cyan);
+  --color-accent: var(--color-pink);
+}
+
 :root[data-theme="cyber-arcade"] {
   --color-primary: var(--color-cyan);
   --color-secondary: var(--color-orange);
