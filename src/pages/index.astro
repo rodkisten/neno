@@ -222,10 +222,10 @@ const skillGroups = [
         <div class="neo-container neo-hero__inner">
           <div class="neo-hero__intro">
             <span class="neo-hero__eyebrow hud-text">JUAN SILVA GARCIA / SOFTWARE & AI</span>
-            <h1 id="hero-heading" class="neo-hero__title">
-              <span class="line-pop">CÓDIGO.</span>
-              <span class="line-outline">PESQUISA.</span>
-              <span class="line-accent">& JOGOS.</span>
+            <h1 id="hero-heading" class="neo-hero__title" aria-label="Código. Pesquisa. E jogos.">
+              <span class="line-pop" aria-hidden="true">{'CÓDIGO.'.split('').map((char, index) => <span class="neo-letter" style={'--char-index:' + index}>{char}</span>)}</span>
+              <span class="line-outline" aria-hidden="true">{'PESQUISA.'.split('').map((char, index) => <span class="neo-letter" style={'--char-index:' + index}>{char}</span>)}</span>
+              <span class="line-accent" aria-hidden="true">{'& JOGOS.'.split('').map((char, index) => <span class="neo-letter" style={'--char-index:' + index}>{char === ' ' ? '\u00A0' : char}</span>)}</span>
             </h1>
             <p class="neo-hero__description">
               <strong>Engenharia de software, IA e sistemas interativos.</strong>
